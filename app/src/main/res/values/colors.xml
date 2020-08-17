@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <color name="colorPrimary">#008577</color>
+    <color name="colorPrimaryDark">#00574B</color>
+    <color name="colorAccent">#D81B60</color>
+    <color name="tabColor">#AD00BCD4</color>
+    <color name="tabBackground">#1100BCD4</color>
+    <color name="tabBackground1">#5603A9F4</color>
+    <color name="transparent">#1A000000</color>
+    <color name="menuSelected">#E900BCD4</color>
+    <color name="mainColor">#60CDDC39</color>
+</resources>

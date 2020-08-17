@@ -1,0 +1,42 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:id="@+id/messageItem_llMain"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:orientation="horizontal">
+
+    <de.hdodenhof.circleimageview.CircleImageView
+        android:layout_marginTop="4dp"
+        android:layout_width="30dp"
+        android:layout_height="30dp"
+        android:id="@+id/chatProfile"/>
+
+    <RelativeLayout
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content">
+
+        <LinearLayout
+            android:id="@+id/messageItem_llDestination"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:gravity="center"
+            android:orientation="vertical">
+
+            <TextView
+                android:id="@+id/messageItem_tvName"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="이름" />
+
+        </LinearLayout>
+
+        <TextView
+            android:layout_below="@id/messageItem_llDestination"
+            android:id="@+id/messageItem_tvMessage"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content" />
+
+    </RelativeLayout>
+
+
+</LinearLayout>
