@@ -33,16 +33,17 @@ public class SendNotification {
                     if(object instanceof CompanyUpload) { //회사에서 연락할 경우
                         type = "companyUpload";
                         dataJson.put("type", type);
+                        dataJson.put("body", message);
+                        dataJson.put("title", title);
+                        dataJson.put("click_action", "OPEN_ACTIVITY");
                     } else if(object instanceof Upload) { //개인이 연락할 경우
                         type = "upload";
                         dataJson.put("type", type);
+                        dataJson.put("body", message);
+                        dataJson.put("title", title);
+                        dataJson.put("click_action", "OPEN_ACTIVITY");
                     }
                     json.put("data", dataJson);
-
-                    JSONObject notiJson = new JSONObject();
-                    notiJson.put("body", message);
-                    notiJson.put("title", title);
-                    json.put("notification", notiJson);
                     json.put("to", regToken);
                     RequestBody body = RequestBody.create(JSON, json.toString());
                     Request request = new Request.Builder()

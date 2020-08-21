@@ -69,7 +69,7 @@ public class ConnectActivity1 extends AppCompatActivity {
                         public void onClick(View v) {
                             String companyEditText = company.getText().toString().trim();
                             String phoneEditText = phone.getText().toString().trim();
-                            cDatabaseRef.child("employee").child(uid).child("companyName").setValue(companyEditText);
+                            cDatabaseRef.child("employee").child(uid).child("companyName").setValue("(대타)" + companyEditText);
                             cDatabaseRef.child("employee").child(uid).child("companyPhone").setValue(phoneEditText);
                             Intent intent = new Intent(ConnectActivity1.this, ConnectActivity.class);
                             intent.putExtra("ResumeUid", ResumeUid);
@@ -83,7 +83,7 @@ public class ConnectActivity1 extends AppCompatActivity {
                         public void onClick(View v) {
                             String companyEditText = company.getText().toString().trim();
                             String phoneEditText = phone.getText().toString().trim();
-                            mUpload = new Upload(companyEditText, phoneEditText, uid);
+                            mUpload = new Upload("(대타)"+ companyEditText, phoneEditText, uid);
                             cDatabaseRef.child("employee").child(uid).setValue(mUpload);
                             Intent intent = new Intent(ConnectActivity1.this, ConnectActivity.class);
                             intent.putExtra("ResumeUid", ResumeUid);

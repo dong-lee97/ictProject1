@@ -106,12 +106,12 @@ public class FragmentChat extends Fragment {
                 public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
                     if (dataSnapshot.child("company").hasChild(finalDestinationUid)) {
                         CompanyUpload cUploads = dataSnapshot.child("company").child(finalDestinationUid).getValue(CompanyUpload.class);
-                        customViewHolder.profile.setImageResource(R.drawable.ic_man);
+                        customViewHolder.profile.setImageResource(R.drawable.ic_person);
                         customViewHolder.tvTitle.setText(cUploads.getCName());
                     } else if (dataSnapshot.child("employee").hasChild(finalDestinationUid)) {
                         Upload mUploads = dataSnapshot.child("employee").child(finalDestinationUid).getValue(Upload.class);
                         if (mUploads.getName() == null) {
-                            customViewHolder.profile.setImageResource(R.drawable.ic_man);
+                            customViewHolder.profile.setImageResource(R.drawable.ic_person);
                             customViewHolder.tvTitle.setText(mUploads.getCompanyName());
                         } else {
                             Picasso.with(mContext)

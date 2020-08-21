@@ -8,6 +8,8 @@ import androidx.recyclerview.widget.RecyclerView;
 import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
+import android.telephony.SmsManager;
+import android.util.Log;
 import android.view.Gravity;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -17,6 +19,7 @@ import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.example.ictproject.ChatModel;
 import com.example.ictproject.R;
@@ -37,12 +40,14 @@ import java.util.List;
 
 public class MessageActivity extends AppCompatActivity {
 
-    private String destinationUid, chatRoomUid, uid;
+    private String destinationUid, chatRoomUid, uid, phoneNum;
     private Button button, matchButton;
     private EditText editText;
     private RecyclerView recyclerView;
     private ImageView imageView;
     private TextView textView;
+    private Upload mUploads;
+    private CompanyUpload cUploads;
     private Context context;
 
     @Override
@@ -97,6 +102,43 @@ public class MessageActivity extends AppCompatActivity {
             }
         });
         checkChatRoom();
+
+        matchButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                FirebaseDatabase.getInstance().getReference("user").addListenerForSingleValueEvent(new ValueEventListener() {
+                    @Override
+                    public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
+                        if (dataSnapshot.child("company").hasChild(uid)) {
+                            matchButton.setEnabled(false);
+                        } else {
+                            if (dataSnapshot.child("company").hasChild(destinationUid)) {
+                                cUploads = dataSnapshot.child("company").child(destinationUid).getValue(CompanyUpload.class);
+                                phoneNum = cUploads.getCPhone().trim();
+
+                            } else {
+                                mUploads = dataSnapshot.child("employee").child(destinationUid).getValue(Upload.class);
+                                phoneNum = mUploads.getCompanyPhone().trim();
+                            }
+
+                            try{
+                                SmsManager smgr = SmsManager.getDefault();
+                                smgr.sendTextMessage(phoneNum, null, "안녕하세요, 이번에 쉐어빌리티를 통해 근무하게 되어 연락드립니다", null, null);
+                                Toast.makeText(MessageActivity.this, "메시지를 성공적으로 전송하였습니다.", Toast.LENGTH_SHORT).show();
+                            }
+                            catch (Exception e) {
+                                Toast.makeText(MessageActivity.this, "메시지 전송을 실패하였습니다.", Toast.LENGTH_SHORT).show();
+                            }
+                        }
+                    }
+
+                    @Override
+                    public void onCancelled(@NonNull DatabaseError databaseError) {
+
+                    }
+                });
+            }
+        });
 
     }
 

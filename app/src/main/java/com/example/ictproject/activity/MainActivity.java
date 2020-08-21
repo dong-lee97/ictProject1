@@ -6,6 +6,7 @@ import androidx.fragment.app.Fragment;
 
 import android.content.Intent;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.ImageView;
@@ -39,7 +40,7 @@ public class MainActivity extends AppCompatActivity {
     private ImageView r_resume;
     private FirebaseUser user;
     private FirebaseFirestore firebaseFirestore;
-    private String uid;
+    private String uid, uid1, uid2;
 
     Fragment FragmentHome;
     Fragment FragmentRecommend;
