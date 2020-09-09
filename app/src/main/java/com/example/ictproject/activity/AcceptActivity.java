@@ -5,7 +5,6 @@ import androidx.appcompat.app.AppCompatActivity;
 
 import android.content.Intent;
 import android.os.Bundle;
-import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
@@ -20,16 +19,13 @@ import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
-import com.google.gson.JsonObject;
 
 public class AcceptActivity extends AppCompatActivity {
-    private Button acceptButton, rejectButton;
     private EditText aCompany, aPhone;
-    private FirebaseUser user;
-    private DatabaseReference DatabaseRef;
     private CompanyUpload cUpload;
     private Upload upload;
-    private String uid, companyUid, uploadUid;
+    private String companyUid;
+    private String uploadUid;
     final static String companyInformation = "companyInformation";
     final static String uploadInformation = "uploadInformation";
 
@@ -38,20 +34,20 @@ public class AcceptActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_acceptactivity);
 
-        acceptButton = findViewById(R.id.accept_button);
-        rejectButton = findViewById(R.id.reject_button);
+        Button acceptButton = findViewById(R.id.accept_button);
+        Button rejectButton = findViewById(R.id.reject_button);
         aCompany = findViewById(R.id.aCompanyName);
         aPhone = findViewById(R.id.aCompanyPhone);
 
-        DatabaseRef = FirebaseDatabase.getInstance().getReference("user");
-        user = FirebaseAuth.getInstance().getCurrentUser();
-        uid = user.getUid();
+        DatabaseReference databaseRef = FirebaseDatabase.getInstance().getReference("user");
+        FirebaseUser user = FirebaseAuth.getInstance().getCurrentUser();
+        String uid = user.getUid();
 
         final Intent intent = getIntent();
         companyUid = intent.getStringExtra(companyInformation);
         uploadUid = intent.getStringExtra(uploadInformation);
 
-        DatabaseRef.addListenerForSingleValueEvent(new ValueEventListener() {
+        databaseRef.addListenerForSingleValueEvent(new ValueEventListener() {
             @Override
             public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
                 if (companyUid == null) {
@@ -81,9 +77,11 @@ public class AcceptActivity extends AppCompatActivity {
                 Intent intent1 = new Intent(AcceptActivity.this, MessageActivity.class);
                 if (companyUid == null){
                     intent1.putExtra("destinationUid", uploadUid);
+                    intent1.putExtra("sendUid", uploadUid);
                     //알림을 준 개인회원의 uid
                 } else if (uploadUid == null) {
                     intent1.putExtra("destinationUid", companyUid);//알림을 준 회사회원의 uid
+                    intent1.putExtra("sendUid", companyUid);
                 }
                 intent1.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
                 startActivity(intent1);

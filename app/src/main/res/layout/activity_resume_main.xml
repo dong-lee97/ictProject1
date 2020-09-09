@@ -38,7 +38,7 @@
         android:layout_height="3dp"
         android:layout_below="@+id/write_resume"
         android:layout_marginTop="5dp"
-        android:background="@color/tabBackground1"
+        android:background="@color/mainColor"
         android:orientation="vertical" />
 
     <LinearLayout
@@ -111,7 +111,7 @@
         android:layout_height="3dp"
         android:layout_below="@+id/profileLayout"
         android:layout_marginTop="5dp"
-        android:background="@color/tabBackground1"
+        android:background="@color/mainColor"
         android:orientation="vertical" />
 
     <LinearLayout
@@ -148,6 +148,41 @@
 
             <TextView
                 android:id="@+id/mExperience"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:background="#00ff0000"
+                android:padding="4dp"
+                android:textColor="#000000"
+                android:textSize="15dp" />
+
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical">
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal">
+
+                <ImageView
+                    android:layout_width="30dp"
+                    android:layout_height="30dp"
+                    android:src="@drawable/ic_profile" />
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center_vertical"
+                    android:layout_marginLeft="8dp"
+                    android:text="세부사항"
+                    android:textColor="#000000" />
+            </LinearLayout>
+
+            <TextView
+                android:id="@+id/mExperienceDetail"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:background="#00ff0000"

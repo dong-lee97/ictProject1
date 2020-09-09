@@ -19,10 +19,6 @@ import com.google.firebase.database.FirebaseDatabase;
 public class CompanyInfo extends AppCompatActivity {
 
     private EditText cEditTextName, cEditTextPhone;
-    private Button cUploadButton;
-
-    private FirebaseUser user;
-
     private DatabaseReference cDatabaseRef;
 
     @Override
@@ -33,7 +29,7 @@ public class CompanyInfo extends AppCompatActivity {
         cEditTextName = findViewById(R.id.companyEditText);
         cEditTextPhone = findViewById(R.id.cPhoneEditText);
 
-        cUploadButton = findViewById(R.id.cUploadButton);
+        Button cUploadButton = findViewById(R.id.cUploadButton);
 
         cDatabaseRef = FirebaseDatabase.getInstance().getReference("user");
 
@@ -55,7 +51,7 @@ public class CompanyInfo extends AppCompatActivity {
 
     private void cUploadFile() {
         if(cEditTextName.length()>0 && cEditTextPhone.length()>8) {
-            user = FirebaseAuth.getInstance().getCurrentUser();
+            FirebaseUser user = FirebaseAuth.getInstance().getCurrentUser();
             CompanyUpload companyUpload = new CompanyUpload(cEditTextName.getText().toString().trim(),
                     cEditTextPhone.getText().toString().trim(), user.getUid());
             cDatabaseRef.child("company").child(user.getUid()).setValue(companyUpload);

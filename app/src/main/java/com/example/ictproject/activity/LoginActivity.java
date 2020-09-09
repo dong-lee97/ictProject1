@@ -11,8 +11,6 @@ import android.widget.Button;
 import android.widget.CheckBox;
 import android.widget.EditText;
 import android.widget.TextView;
-
-import com.example.ictproject.FirstLoadingPage;
 import com.example.ictproject.R;
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
@@ -25,7 +23,6 @@ import com.kakao.auth.ISessionCallback;
 import com.kakao.util.exception.KakaoException;
 import com.kakao.util.helper.log.Logger;
 
-import java.security.PublicKey;
 
 import static com.example.ictproject.upload.Util.showToast;
 
@@ -33,16 +30,12 @@ public class LoginActivity extends AppCompatActivity {
     private FirebaseAuth mAuth;
 
     private EditText email, password;
-    private Button loginButton, kakaoLogin;
-    private TextView register;
     private CheckBox checkBox;
     private SharedPreferences appData;
     private boolean saveLoginData;
     private FirebaseUser currentUser;
-    private String companyUid, uploadUid, id, pwd;
+    private String id, pwd;
     private SessionCallback sessionCallback = new SessionCallback();
-    final static String companyInformation = "companyInformation";
-    final static String uploadInformation = "uploadInformation";
 
     Session session;
 
@@ -54,9 +47,9 @@ public class LoginActivity extends AppCompatActivity {
         mAuth = FirebaseAuth.getInstance();
         email = findViewById(R.id.email);
         password = findViewById(R.id.password);
-        loginButton = findViewById(R.id.loginButton);
-        register = findViewById(R.id.register);
-        kakaoLogin = findViewById(R.id.kakaoLogin);
+        Button loginButton = findViewById(R.id.loginButton);
+        TextView register = findViewById(R.id.register);
+        Button kakaoLogin = findViewById(R.id.kakaoLogin);
         session = Session.getCurrentSession();
         session.addCallback(sessionCallback);
         currentUser = mAuth.getCurrentUser();
@@ -182,7 +175,6 @@ public class LoginActivity extends AppCompatActivity {
                         public void onComplete(@NonNull Task<AuthResult> task) {
                             if (task.isSuccessful()) {
                                 // Sign in success, update UI with the signed-in user's information
-                                FirebaseUser user = mAuth.getCurrentUser();
                                 showToast(LoginActivity.this, "로그인 성공!");
                                 myStartActivity(MainActivity.class);
                             } else {

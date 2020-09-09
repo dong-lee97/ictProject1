@@ -14,7 +14,6 @@ import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
 import com.google.firebase.auth.AuthResult;
 import com.google.firebase.auth.FirebaseAuth;
-import com.google.firebase.auth.FirebaseUser;
 
 public class CompanyRegister extends AppCompatActivity {
 
@@ -32,10 +31,8 @@ public class CompanyRegister extends AppCompatActivity {
     View.OnClickListener onClickListener = new View.OnClickListener() {
         @Override
         public void onClick(View v) {
-            switch (v.getId()){
-                case R.id.cSignUpButton:
-                    signUp();
-                    break;
+            if (v.getId() == R.id.cSignUpButton) {
+                signUp();
             }
         }
     };
@@ -52,7 +49,6 @@ public class CompanyRegister extends AppCompatActivity {
                             @Override
                             public void onComplete(@NonNull Task<AuthResult> task) {
                                 if (task.isSuccessful()) {
-                                    FirebaseUser user = mAuth.getCurrentUser();
                                     startToast("회원가입 성공!");
                                     myStartActivity(CompanyInfo.class);
                                 } else {

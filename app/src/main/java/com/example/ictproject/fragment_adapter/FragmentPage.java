@@ -10,11 +10,10 @@ import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.TextView;
 import android.widget.Toast;
-
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
-
+import com.bumptech.glide.Glide;
 import com.example.ictproject.R;
 import com.example.ictproject.activity.LoginActivity;
 import com.example.ictproject.activity.Resume_revise;
@@ -30,7 +29,7 @@ import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
 import com.google.firebase.storage.FirebaseStorage;
 import com.google.firebase.storage.StorageReference;
-import com.squareup.picasso.Picasso;
+
 
 public class FragmentPage extends Fragment {
 
@@ -64,10 +63,9 @@ public class FragmentPage extends Fragment {
                 if (uid != null){
                     if (dataSnapshot.child("employee").hasChild(uid)) {
                         Upload upload = dataSnapshot.child("employee").child(uid).getValue(Upload.class);
-                        Picasso.with(context)
+                        Glide.with(getActivity())
                                 .load(upload.getImageUrl())
-                                .fit()
-                                .centerCrop()
+                                .fitCenter()
                                 .into(imageView);
                         name.setText(upload.getName());
                     } else if (dataSnapshot.child("company").hasChild(uid)){

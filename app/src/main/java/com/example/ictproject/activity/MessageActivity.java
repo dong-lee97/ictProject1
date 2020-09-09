@@ -5,11 +5,9 @@ import androidx.appcompat.app.AppCompatActivity;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
-import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
 import android.telephony.SmsManager;
-import android.util.Log;
 import android.view.Gravity;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -21,6 +19,7 @@ import android.widget.LinearLayout;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.bumptech.glide.Glide;
 import com.example.ictproject.ChatModel;
 import com.example.ictproject.R;
 import com.example.ictproject.upload.CompanyUpload;
@@ -33,22 +32,18 @@ import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
-import com.squareup.picasso.Picasso;
-
 import java.util.ArrayList;
 import java.util.List;
 
 public class MessageActivity extends AppCompatActivity {
 
-    private String destinationUid, chatRoomUid, uid, phoneNum;
+    private String destinationUid, chatRoomUid, uid,  phoneNum;
     private Button button, matchButton;
     private EditText editText;
     private RecyclerView recyclerView;
-    private ImageView imageView;
     private TextView textView;
     private Upload mUploads;
     private CompanyUpload cUploads;
-    private Context context;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -61,7 +56,7 @@ public class MessageActivity extends AppCompatActivity {
         matchButton = findViewById(R.id.matchButton);
         editText = findViewById(R.id.messageActivity_et);
         recyclerView = findViewById(R.id.messageActivity_rv);
-        imageView = findViewById(R.id.backward);
+        ImageView imageView = findViewById(R.id.backward);
         textView = findViewById(R.id.chatRoomName);
 
         imageView.setOnClickListener(new View.OnClickListener() {
@@ -267,10 +262,9 @@ public class MessageActivity extends AppCompatActivity {
                                 messageViewHolder.llDestination.setVisibility(View.VISIBLE);
                                 messageViewHolder.tvMessage.setText(comments.get(position).message);
                                 messageViewHolder.llMain.setGravity(Gravity.LEFT);
-                                Picasso.with(context)
+                                Glide.with(getApplicationContext())
                                         .load(mUploads.getImageUrl())
-                                        .fit()
-                                        .centerCrop()
+                                        .fitCenter()
                                         .into(messageViewHolder.chatProfile);
                             }
                             messageViewHolder.tvMessage.setTextSize(15);

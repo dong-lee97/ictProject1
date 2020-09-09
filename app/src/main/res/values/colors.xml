@@ -8,5 +8,11 @@
     <color name="tabBackground1">#5603A9F4</color>
     <color name="transparent">#1A000000</color>
     <color name="menuSelected">#E900BCD4</color>
-    <color name="mainColor">#60CDDC39</color>
+    <color name="mainColor">#CDDC90</color>
+    <color name="white">#ffffff</color>
+    <color name="black">#000000</color>
+
 </resources>
+
+
+

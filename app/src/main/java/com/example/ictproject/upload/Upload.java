@@ -4,7 +4,9 @@ public class Upload {
     private String name;
     private String imageUrl;
     private String age;
+    private String sex;
     private String experience;
+    private String detail;
     private String region;
     private String day;
     private String uid;
@@ -15,27 +17,30 @@ public class Upload {
         //empty constructor needed
     }
 
-    public Upload(String companyName, String companyPhone, String uid){
+    public Upload(String companyName, String companyPhone, String uid) {
         this.companyName = companyName;
         this.companyPhone = companyPhone;
         this.uid = uid;
     }
 
-    public Upload(String name, String imageUrl, String age, String experience, String region, String day, String uid){
+    public Upload(String name, String imageUrl, String age, String sex, String experience, String detail, String region, String day, String uid) {
         this.name = name;
         this.imageUrl = imageUrl;
         this.age = age;
+        this.sex = sex;
         this.experience = experience;
+        this.detail = detail;
         this.region = region;
         this.day = day;
         this.uid = uid;
     }
 
-    public Upload(String name, String imageUrl, String age, String experience,String region, String day, String uid, String companyName, String companyPhone) {
+    public Upload(String name, String imageUrl, String age, String sex, String experience, String detail, String region, String day, String uid, String companyName, String companyPhone) {
         this.name = name;
         this.imageUrl = imageUrl;
         this.age = age;
         this.experience = experience;
+        this.detail = detail;
         this.region = region;
         this.day = day;
         this.uid = uid;
@@ -113,5 +118,21 @@ public class Upload {
 
     public void setCompanyPhone(String companyPhone) {
         this.companyPhone = companyPhone;
+    }
+
+    public String getDetail() {
+        return detail;
+    }
+
+    public void setDetail(String detail) {
+        this.detail = detail;
+    }
+
+    public String getSex() {
+        return sex;
+    }
+
+    public void setSex(String sex) {
+        this.sex = sex;
     }
 }

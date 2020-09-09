@@ -8,56 +8,285 @@
         android:id="@+id/title"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:background="@color/tabBackground">
+        android:background="@color/mainColor">
+
+        <ImageView
+            android:id="@+id/filter"
+            android:layout_width="35dp"
+            android:layout_height="wrap_content"
+            android:layout_alignParentLeft="true"
+            android:layout_centerVertical="true"
+            android:padding="6dp"
+            android:src="@drawable/ic_icon_filter" />
 
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            android:layout_centerInParent="true"
+            android:padding="12dp"
             android:text="Share Ability"
             android:textColor="#000000"
-            android:textStyle="bold"
-            android:padding="12dp"
-            android:layout_centerInParent="true"/>
+            android:textStyle="bold" />
 
         <ImageView
             android:id="@+id/r_resume"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:src="@drawable/ic_plus"
+            android:layout_alignParentRight="true"
             android:padding="12dp"
-            android:layout_alignParentRight="true"/>
+            android:src="@drawable/ic_plus" />
     </RelativeLayout>
-    
-    <LinearLayout
-        android:id="@+id/spinnerLayout"
-        android:layout_below="@+id/title"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:orientation="horizontal">
 
-        <Spinner
-            android:id="@+id/spinner1"
-            android:layout_width="match_parent"
-            android:layout_height="40dp"
-            android:layout_weight="1"/>
-        <Spinner
-            android:id="@+id/spinner2"
-            android:layout_width="match_parent"
-            android:layout_height="40dp"
-            android:layout_weight="1"/>
-        
-        <Spinner
-            android:id="@+id/spinner3"
-            android:layout_width="match_parent"
-            android:layout_height="40dp"
-            android:layout_weight="1"/>
-        
-    </LinearLayout>
-    
     <androidx.recyclerview.widget.RecyclerView
-        android:layout_below="@+id/spinnerLayout"
+        android:id="@+id/recycler_view"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:id="@+id/recycler_view"/>
+        android:layout_below="@+id/title"
+        android:visibility="visible"/>
+
+    <RelativeLayout
+        android:id="@+id/fExperienceLayout"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_below="@+id/title"
+        android:visibility="gone">
+
+        <TextView
+            android:id="@+id/sexTextLayout"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="10dp"
+            android:layout_marginTop="5dp"
+            android:padding="10dp"
+            android:text="성별"
+            android:textColor="@color/black"
+            android:textSize="15dp"
+            android:textStyle="bold" />
+
+        <LinearLayout
+            android:id="@+id/sexSpinner"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_below="@+id/sexTextLayout"
+            android:orientation="horizontal">
+
+            <Spinner
+                android:id="@+id/sexSpinner1"
+                android:layout_width="140dp"
+                android:layout_height="35dp"
+                android:layout_marginLeft="10dp" />
+
+        </LinearLayout>
+
+        <TextView
+            android:id="@+id/ageTextLayout"
+            android:layout_below="@+id/sexSpinner"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="10dp"
+            android:layout_marginTop="5dp"
+            android:padding="10dp"
+            android:text="나이"
+            android:textColor="@color/black"
+            android:textSize="15dp"
+            android:textStyle="bold" />
+
+        <LinearLayout
+            android:id="@+id/ageSpinner"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_below="@+id/ageTextLayout"
+            android:orientation="horizontal">
+
+            <Spinner
+                android:id="@+id/ageSpinner1"
+                android:layout_width="140dp"
+                android:layout_height="35dp"
+                android:layout_marginLeft="10dp" />
+
+        </LinearLayout>
+
+        <TextView
+            android:id="@+id/experienceText"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_below="@+id/ageSpinner"
+            android:layout_marginLeft="10dp"
+            android:layout_marginTop="5dp"
+            android:padding="10dp"
+            android:text="경력"
+            android:textColor="@color/black"
+            android:textSize="15dp"
+            android:textStyle="bold" />
+
+        <LinearLayout
+            android:id="@+id/firstExperienceLayout"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_below="@+id/experienceText"
+            android:orientation="horizontal">
+
+
+            <Button
+                android:id="@+id/fCafeButton"
+                android:layout_width="60dp"
+                android:layout_height="40dp"
+                android:layout_marginLeft="5dp"
+                android:background="@drawable/round"
+                android:text="카페"
+                android:textSize="13dp" />
+
+            <Button
+                android:id="@+id/fRestaurantButton"
+                android:layout_width="80dp"
+                android:layout_height="40dp"
+                android:layout_marginLeft="5dp"
+                android:background="@drawable/round"
+                android:text="음식점/주점"
+                android:textSize="13dp" />
+
+            <Button
+                android:id="@+id/fcStoreButton"
+                android:layout_width="65dp"
+                android:layout_height="40dp"
+                android:layout_marginLeft="5dp"
+                android:background="@drawable/round"
+                android:text="편의점"
+                android:textSize="13dp" />
+
+            <Button
+                android:id="@+id/fAcademyButton"
+                android:layout_width="60dp"
+                android:layout_height="40dp"
+                android:layout_marginLeft="5dp"
+                android:background="@drawable/round"
+                android:text="학원"
+                android:textSize="13dp" />
+
+            <Button
+                android:id="@+id/fMartButton"
+                android:layout_width="60dp"
+                android:layout_height="40dp"
+                android:layout_marginLeft="5dp"
+                android:background="@drawable/round"
+                android:text="마트"
+                android:textSize="13dp" />
+
+        </LinearLayout>
+
+        <LinearLayout
+            android:id="@+id/secondExperienceLayout"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_below="@+id/firstExperienceLayout"
+            android:layout_marginTop="5dp"
+            android:orientation="horizontal">
+
+
+            <Button
+                android:id="@+id/fCleanButton"
+                android:layout_width="75dp"
+                android:layout_height="40dp"
+                android:layout_marginLeft="5dp"
+                android:background="@drawable/round"
+                android:text="청소/용역"
+                android:textSize="13dp" />
+
+            <Button
+                android:id="@+id/fClothesButton"
+                android:layout_width="60dp"
+                android:layout_height="40dp"
+                android:layout_marginLeft="5dp"
+                android:background="@drawable/round"
+                android:text="의류"
+                android:textSize="13dp" />
+
+            <Button
+                android:id="@+id/fBeautyButton"
+                android:layout_width="60dp"
+                android:layout_height="40dp"
+                android:layout_marginLeft="5dp"
+                android:background="@drawable/round"
+                android:text="뷰티"
+                android:textSize="13dp" />
+
+            <Button
+                android:id="@+id/fGymButton"
+                android:layout_width="75dp"
+                android:layout_height="40dp"
+                android:layout_marginLeft="5dp"
+                android:background="@drawable/round"
+                android:text="운동/헬스"
+                android:textSize="13dp" />
+
+            <Button
+                android:id="@+id/fPcButton"
+                android:layout_width="60dp"
+                android:layout_height="40dp"
+                android:layout_marginLeft="5dp"
+                android:background="@drawable/round"
+                android:text="PC방"
+                android:textSize="13dp" />
+
+        </LinearLayout>
+
+        <TextView
+            android:id="@+id/regionText"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_below="@+id/secondExperienceLayout"
+            android:layout_marginLeft="10dp"
+            android:layout_marginTop="15dp"
+            android:padding="10dp"
+            android:text="지역"
+            android:textColor="@color/black"
+            android:textSize="15dp"
+            android:textStyle="bold" />
+
+        <LinearLayout
+            android:id="@+id/regionSpinner"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_below="@+id/regionText"
+            android:orientation="horizontal">
+
+            <Spinner
+                android:layout_weight="1"
+                android:id="@+id/wholeSpinner"
+                android:layout_width="120dp"
+                android:layout_height="35dp"
+                android:layout_marginLeft="15dp" />
+
+            <Spinner
+                android:layout_weight="1"
+                android:id="@+id/spinner1"
+                android:layout_width="120dp"
+                android:layout_height="35dp"
+                android:layout_marginLeft="15dp" />
+
+            <Spinner
+                android:layout_weight="1"
+                android:id="@+id/spinner2"
+                android:layout_width="120dp"
+                android:layout_height="35dp"
+                android:layout_marginLeft="15dp" />
+
+        </LinearLayout>
+
+        <TextView
+            android:id="@+id/fExperienceOk"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentBottom="true"
+            android:layout_centerInParent="true"
+            android:layout_marginBottom="35dp"
+            android:background="#ffffff"
+            android:text="검색"
+            android:textStyle="bold"
+            android:textColor="@color/mainColor" />
+
+
+    </RelativeLayout>
+
 
 </RelativeLayout>

@@ -4,7 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@color/tabBackground"
+    android:background="@color/mainColor"
     tools:context=".activity.LoginActivity">
 
     <LinearLayout
@@ -18,7 +18,7 @@
         <ImageView
             android:layout_width="70dp"
             android:layout_height="50dp"
-            android:src="@drawable/ic_idcard" />
+            android:src="@drawable/ic_loading" />
 
         <LinearLayout
             android:layout_width="wrap_content"
@@ -27,8 +27,9 @@
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
+                android:fontFamily="@font/bmeuljirottf"
                 android:text="Share Ability"
-                android:textColor="#000000"
+                android:textColor="@color/black"
                 android:textSize="40dp"
                 android:textStyle="bold" />
 
@@ -52,7 +53,7 @@
             android:layout_width="match_parent"
             android:layout_height="40dp"
             android:layout_marginBottom="6dp"
-            android:background="#ffffff"
+            android:background="@color/white"
             android:hint="이메일"
             android:padding="4dp"
             android:textColorHint="#77383A3C" />
@@ -61,7 +62,7 @@
             android:id="@+id/password"
             android:layout_width="match_parent"
             android:layout_height="40dp"
-            android:background="#ffffff"
+            android:background="@color/white"
             android:hint="비밀번호"
             android:inputType="textPassword"
             android:padding="4dp"
@@ -88,44 +89,44 @@
             android:layout_width="100dp"
             android:layout_height="40dp"
             android:layout_gravity="center"
-            android:background="#ffffff"
+            android:background="@color/white"
             android:text="로그인" />
 
     </LinearLayout>
 
     <LinearLayout
         android:id="@+id/snsLoginLayout"
-        android:layout_below="@+id/loginButtonLayout"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:orientation="vertical"
+        android:layout_below="@+id/loginButtonLayout"
         android:layout_marginTop="30dp"
-        android:gravity="center">
+        android:gravity="center"
+        android:orientation="vertical">
 
         <Button
             android:id="@+id/kakaoLogin"
             android:layout_width="180dp"
             android:layout_height="50dp"
+            android:layout_marginBottom="8dp"
+            android:background="@color/white"
             android:drawableLeft="@drawable/ic_iconfinder_kakao_talk2_289120"
             android:drawablePadding="5dp"
-            android:text="카카오로 로그인"
-            android:layout_marginBottom="8dp"
-            android:background="#ffffff" />
+            android:text="카카오로 로그인" />
 
         <Button
             android:id="@+id/emailLogin"
             android:layout_width="180dp"
             android:layout_height="50dp"
+            android:background="@color/white"
             android:drawableLeft="@drawable/ic_iconfinder_mail_115714"
             android:drawablePadding="5dp"
-            android:text="이메일로 로그인"
-            android:background="#ffffff"/>
+            android:text="이메일로 로그인" />
     </LinearLayout>
 
     <LinearLayout
-        android:layout_below="@+id/snsLoginLayout"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
+        android:layout_below="@+id/snsLoginLayout"
         android:gravity="center"
         android:orientation="horizontal">
 
@@ -133,10 +134,9 @@
             android:id="@+id/register"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="회원가입"
-            android:clickable="true" />
+            android:clickable="true"
+            android:text="회원가입" />
     </LinearLayout>
-
 
 
 </RelativeLayout>

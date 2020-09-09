@@ -28,11 +28,9 @@ import com.google.firebase.firestore.FirebaseFirestore;
 
 public class ConnectActivity extends AppCompatActivity {
 
-    private Button button2, cancel_button;
+    private Button button2;
     private EditText company, phone;
-    private FirebaseUser user;
     private String uid, ResumeUid, mPushToken;
-    private DatabaseReference cDatabaseRef;
     private CollectionReference collectionReference;
     private CompanyUpload cUpload;
     private Upload mUpload;
@@ -44,13 +42,13 @@ public class ConnectActivity extends AppCompatActivity {
         setContentView(R.layout.activity_connect);
 
         button2 = findViewById(R.id.call2_button);
-        cancel_button = findViewById(R.id.cancel_button);
+        Button cancel_button = findViewById(R.id.cancel_button);
         company = findViewById(R.id.rCompanyName);
         phone = findViewById(R.id.rCompanyPhone);
 
-        cDatabaseRef = FirebaseDatabase.getInstance().getReference("user");
+        DatabaseReference cDatabaseRef = FirebaseDatabase.getInstance().getReference("user");
         collectionReference = FirebaseFirestore.getInstance().collection("token");
-        user = FirebaseAuth.getInstance().getCurrentUser();
+        FirebaseUser user = FirebaseAuth.getInstance().getCurrentUser();
         uid = user.getUid();
 
         Intent intent = getIntent();

@@ -8,13 +8,12 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.TextView;
-
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
-
+import com.bumptech.glide.Glide;
 import com.example.ictproject.ChatModel;
 import com.example.ictproject.R;
 import com.example.ictproject.activity.MessageActivity;
@@ -25,8 +24,6 @@ import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
-import com.squareup.picasso.Picasso;
-
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
@@ -114,10 +111,9 @@ public class FragmentChat extends Fragment {
                             customViewHolder.profile.setImageResource(R.drawable.ic_person);
                             customViewHolder.tvTitle.setText(mUploads.getCompanyName());
                         } else {
-                            Picasso.with(mContext)
+                            Glide.with(getActivity())
                                     .load(mUploads.getImageUrl())
-                                    .fit()
-                                    .centerCrop()
+                                    .fitCenter()
                                     .into(customViewHolder.profile);
                             customViewHolder.tvTitle.setText(mUploads.getName());
                         }

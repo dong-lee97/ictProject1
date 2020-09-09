@@ -9,7 +9,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="어떤 분이신가요?"
-        android:textColor="#000000"
+        android:textColor="@color/black"
         android:textSize="30dp"
         android:textStyle="bold" />
 
@@ -29,14 +29,14 @@
             android:layout_width="100dp"
             android:layout_height="50dp"
             android:layout_marginBottom="12dp"
-            android:background="@color/tabBackground"
+            android:background="#32CDDC39"
             android:text="개인회원" />
 
         <Button
             android:id="@+id/button_of_employer"
             android:layout_width="100dp"
             android:layout_height="50dp"
-            android:background="#6803A9F4"
+            android:background="#88CDDC39"
             android:text="사업자회원" />
 
     </LinearLayout>

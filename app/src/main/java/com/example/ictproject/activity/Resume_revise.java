@@ -1,7 +1,6 @@
 package com.example.ictproject.activity;
 
 import android.content.ContentResolver;
-import android.content.Context;
 import android.content.Intent;
 import android.net.Uri;
 import android.os.Bundle;
@@ -11,10 +10,9 @@ import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.Toast;
-
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
-
+import com.bumptech.glide.Glide;
 import com.example.ictproject.R;
 import com.example.ictproject.upload.Upload;
 import com.google.android.gms.tasks.OnFailureListener;
@@ -31,37 +29,37 @@ import com.google.firebase.storage.FirebaseStorage;
 import com.google.firebase.storage.StorageReference;
 import com.google.firebase.storage.StorageTask;
 import com.google.firebase.storage.UploadTask;
-import com.squareup.picasso.Picasso;
+
 
 public class Resume_revise extends AppCompatActivity {
 
     private static final int PICK_IMAGE_REQUEST = 1;
 
-    private EditText mEditTextFileName, mEditTextAge, mExperience, mRegion, mDay;
+    private EditText mEditTextFileName, mEditTextAge, mExperience, mRegion, mDay, mDetail;
     private ImageView mImageView;
-    private Button mButtonUpload;
     private Uri mImageUri;
-    private String uid;
+    private String uid, sex;
     private FirebaseUser user;
     private StorageReference mStorageRef;
     private DatabaseReference mDatabaseRef;
     private StorageTask mUploadTask;
-    private Context context;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_resume_revise);
 
-        mButtonUpload = findViewById(R.id.button_upload1);
+        Button mButtonUpload = findViewById(R.id.button_upload1);
         mEditTextFileName = findViewById(R.id.edit_text_file_name1);
         mEditTextAge = findViewById(R.id.edit_text_age1);
         mExperience = findViewById(R.id.experience1);
+        mDetail = findViewById(R.id.detail1);
         mRegion = findViewById(R.id.possible_region1);
         mDay = findViewById(R.id.possible_day1);
         mImageView = findViewById(R.id.image_view1);
         uid = FirebaseAuth.getInstance().getCurrentUser().getUid();
 
+        sex = "남";
         mStorageRef = FirebaseStorage.getInstance().getReference("user");
         mDatabaseRef = FirebaseDatabase.getInstance().getReference("user");
 
@@ -72,13 +70,13 @@ public class Resume_revise extends AppCompatActivity {
                 mEditTextFileName.setText(upload.getName());
                 mEditTextAge.setText(upload.getAge());
                 mExperience.setText(upload.getExperience());
+                mDetail.setText(upload.getDetail());
                 mRegion.setText(upload.getRegion());
                 mDay.setText(upload.getDay());
 
-                Picasso.with(context)
+                Glide.with(getApplicationContext())
                         .load(upload.getImageUrl())
-                        .fit()
-                        .centerCrop()
+                        .fitCenter()
                         .into(mImageView);
             }
 
@@ -123,7 +121,7 @@ public class Resume_revise extends AppCompatActivity {
                 && data != null && data.getData() != null) {
             mImageUri = data.getData();
 
-            Picasso.with(this).load(mImageUri).into(mImageView);
+            Glide.with(this).load(mImageUri).fitCenter().into(mImageView);
         }
     }
 
@@ -145,8 +143,8 @@ public class Resume_revise extends AppCompatActivity {
                             Task<Uri> urlTask = taskSnapshot.getStorage().getDownloadUrl();
                             while (!urlTask.isSuccessful()) ;
                             Uri downloadUrl = urlTask.getResult();
-                            Upload upload = new Upload(mEditTextFileName.getText().toString().trim(), downloadUrl.toString(), mEditTextAge.getText().toString().trim(),
-                                    mExperience.getText().toString().trim(), mRegion.getText().toString().trim(), mDay.getText().toString().trim(), uid, "", "");
+                            Upload upload = new Upload(mEditTextFileName.getText().toString().trim(), downloadUrl.toString(), mEditTextAge.getText().toString().trim(), sex,
+                                    mExperience.getText().toString().trim(), mDetail.getText().toString().trim(), mRegion.getText().toString().trim(), mDay.getText().toString().trim(), uid, "", "");
                             mDatabaseRef.child("employee").child(uid).setValue(upload);
                             finish();
                         }

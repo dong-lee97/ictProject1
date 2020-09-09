@@ -12,14 +12,14 @@
         android:layout_height="wrap_content"
         android:padding="12dp"
         android:text="구직자 회원가입"
-        android:textColor="#000000"
+        android:textColor="@color/black"
         android:textSize="15dp"
         android:textStyle="normal" />
 
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="4dp"
-        android:background="@color/tabBackground1" />
+        android:background="@color/mainColor" />
 
     <LinearLayout
         android:layout_width="match_parent"
@@ -106,7 +106,7 @@
             android:layout_height="wrap_content"
             android:layout_gravity="center"
             android:layout_marginTop="30dp"
-            android:background="@color/tabBackground1"
+            android:background="@color/mainColor"
             android:text="가입하기"
             android:textColor="#000000"
             android:textStyle="bold" />

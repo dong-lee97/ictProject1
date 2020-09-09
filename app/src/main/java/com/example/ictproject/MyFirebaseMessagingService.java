@@ -1,22 +1,17 @@
 package com.example.ictproject;
 
-import android.app.Notification;
+
 import android.app.NotificationChannel;
 import android.app.NotificationManager;
 import android.app.PendingIntent;
-import android.app.TaskStackBuilder;
 import android.content.Context;
 import android.content.Intent;
 import android.media.RingtoneManager;
 import android.net.Uri;
 import android.os.Build;
-
 import androidx.annotation.NonNull;
 import androidx.core.app.NotificationCompat;
-
 import com.example.ictproject.activity.AcceptActivity;
-import com.example.ictproject.activity.LoginActivity;
-import com.example.ictproject.activity.MainActivity;
 import com.example.ictproject.upload.CompanyUpload;;
 import com.example.ictproject.upload.Upload;
 import com.google.firebase.messaging.RemoteMessage;
@@ -71,7 +66,7 @@ public class MyFirebaseMessagingService extends com.google.firebase.messaging.Fi
         Uri defaultSoundUri = RingtoneManager.getDefaultUri(RingtoneManager.TYPE_NOTIFICATION);
         NotificationCompat.Builder notificationBuilder =
                 new NotificationCompat.Builder(this, channelId)
-                        .setSmallIcon(R.drawable.ic_idcard)
+                        .setSmallIcon(R.drawable.ic_loading)
                         .setContentTitle(title)
                         .setContentText(msg)
                         .setAutoCancel(true)

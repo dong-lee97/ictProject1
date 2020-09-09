@@ -3,14 +3,9 @@ package com.example.ictproject.activity;
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.fragment.app.Fragment;
-
-import android.content.Intent;
 import android.os.Bundle;
-import android.util.Log;
 import android.view.MenuItem;
 import android.view.View;
-import android.widget.ImageView;
-
 import com.example.ictproject.fragment_adapter.FragmentChat;
 import com.example.ictproject.fragment_adapter.FragmentHome;
 import com.example.ictproject.fragment_adapter.FragmentPage;
@@ -20,11 +15,6 @@ import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.android.material.bottomnavigation.BottomNavigationView;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
-import com.google.firebase.database.DataSnapshot;
-import com.google.firebase.database.DatabaseError;
-import com.google.firebase.database.DatabaseReference;
-import com.google.firebase.database.FirebaseDatabase;
-import com.google.firebase.database.ValueEventListener;
 import com.google.firebase.firestore.FirebaseFirestore;
 import com.google.firebase.iid.FirebaseInstanceId;
 import com.google.firebase.iid.InstanceIdResult;
@@ -34,13 +24,9 @@ import java.util.Map;
 
 public class MainActivity extends AppCompatActivity {
 
-    final static String companyInformation = "companyInformation";
-    final static String uploadInformation = "uploadInformation";
-
-    private ImageView r_resume;
-    private FirebaseUser user;
     private FirebaseFirestore firebaseFirestore;
-    private String uid, uid1, uid2;
+    private BottomNavigationView bottomNavigationView;
+    private String uid;
 
     Fragment FragmentHome;
     Fragment FragmentRecommend;
@@ -52,7 +38,7 @@ public class MainActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
-        BottomNavigationView bottomNavigationView = findViewById(R.id.navigationView);
+        bottomNavigationView = findViewById(R.id.navigationView);
         bottomNavigationView.setOnNavigationItemSelectedListener(mOnNavigationItemSelectedListener);
 
         FragmentHome = new FragmentHome();
@@ -62,8 +48,8 @@ public class MainActivity extends AppCompatActivity {
 
         getSupportFragmentManager().beginTransaction().replace(R.id.frameLayout, FragmentHome).commit();
 
-        user = FirebaseAuth.getInstance().getCurrentUser();
-        uid  = user.getUid();
+        FirebaseUser user = FirebaseAuth.getInstance().getCurrentUser();
+        uid = user.getUid();
 
         FirebaseInstanceId.getInstance().getInstanceId().addOnSuccessListener(new OnSuccessListener<InstanceIdResult>() {
             @Override
@@ -80,7 +66,7 @@ public class MainActivity extends AppCompatActivity {
             = new BottomNavigationView.OnNavigationItemSelectedListener() {
         @Override
         public boolean onNavigationItemSelected(@NonNull MenuItem menuItem) {
-            switch (menuItem.getItemId()){
+            switch (menuItem.getItemId()) {
                 case R.id.homeItem:
                     getSupportFragmentManager().beginTransaction().replace(R.id.frameLayout, FragmentHome).commit();
                     return true;
@@ -104,6 +90,14 @@ public class MainActivity extends AppCompatActivity {
         moveTaskToBack(true);
         android.os.Process.killProcess(android.os.Process.myPid());
         System.exit(1);
+    }
+
+    public void setNavigationView(Boolean visible) {
+        if (bottomNavigationView.isShown() && !visible) {
+            bottomNavigationView.setVisibility(View.GONE);
+        } else if (!bottomNavigationView.isShown() && visible) {
+            bottomNavigationView.setVisibility(View.VISIBLE);
+        }
     }
 }
 
