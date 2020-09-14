@@ -24,4 +24,9 @@
         <item name="android:backgroundDimEnabled">false</item>
     </style>
 
+    <style name="Widget.BottomNavigationView"
+        parent="Widget.Design.BottomNavigationView">
+        <item name="fontFamily">@font/bmjua_ttf</item>
+    </style>
+
 </resources>

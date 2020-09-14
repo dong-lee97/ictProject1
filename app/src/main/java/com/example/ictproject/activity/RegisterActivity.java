@@ -9,21 +9,28 @@ import android.view.View;
 import android.widget.EditText;
 import android.widget.Toast;
 import com.example.ictproject.R;
+import com.example.ictproject.upload.Upload;
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
 import com.google.firebase.auth.AuthResult;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
+import com.google.firebase.database.DataSnapshot;
+import com.google.firebase.database.DatabaseError;
+import com.google.firebase.database.DatabaseReference;
+import com.google.firebase.database.FirebaseDatabase;
+import com.google.firebase.database.ValueEventListener;
 
 public class RegisterActivity extends AppCompatActivity {
 
     private FirebaseAuth mAuth;
+    private DatabaseReference DatabaseRef;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_register);
-
+        DatabaseRef = FirebaseDatabase.getInstance().getReference("user");
         mAuth = FirebaseAuth.getInstance();
         findViewById(R.id.signUpButton).setOnClickListener(onClickListener);
     }
@@ -38,11 +45,12 @@ public class RegisterActivity extends AppCompatActivity {
     };
 
     private void signUp() {
-        String email = ((EditText) findViewById(R.id.emailEditText)).getText().toString();
-        String password = ((EditText) findViewById(R.id.passwordEditText)).getText().toString();
-        String passwordCheck = ((EditText) findViewById(R.id.passwordCheck)).getText().toString();
+        final String name = ((EditText) findViewById(R.id.nameEditText)).getText().toString().trim();
+        String email = ((EditText) findViewById(R.id.emailEditText)).getText().toString().trim();
+        String password = ((EditText) findViewById(R.id.passwordEditText)).getText().toString().trim();
+        String passwordCheck = ((EditText) findViewById(R.id.passwordCheck)).getText().toString().trim();
 
-        if(email.length()>0 && password.length()>0 && passwordCheck.length()>0){
+        if(name.length() >1 && email.length()>10 && password.length()>5 && passwordCheck.length()>5){
             if (password.equals(passwordCheck)) {
                 mAuth.createUserWithEmailAndPassword(email, password)
                         .addOnCompleteListener(this, new OnCompleteListener<AuthResult>() {
@@ -50,7 +58,18 @@ public class RegisterActivity extends AppCompatActivity {
                             public void onComplete(@NonNull Task<AuthResult> task) {
                                 if (task.isSuccessful()) {
                                     // Sign in success, update UI with the signed-in user's information
-                                    FirebaseUser user = mAuth.getCurrentUser();
+                                    final String uid = mAuth.getCurrentUser().getUid();
+                                    DatabaseRef.addListenerForSingleValueEvent(new ValueEventListener() {
+                                        @Override
+                                        public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
+                                            Upload upload = new Upload(name, uid);
+                                            DatabaseRef.child("employee").child(uid).setValue(upload);
+                                        }
+                                        @Override
+                                        public void onCancelled(@NonNull DatabaseError databaseError) {
+
+                                        }
+                                    });
                                     startToast("회원가입 성공!");
                                     myStartActivity(LoginActivity.class);
                                 } else {
@@ -75,7 +94,8 @@ public class RegisterActivity extends AppCompatActivity {
 
     private void myStartActivity(Class c) {
         Intent intent = new Intent(this, c);
-        intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
+        intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TASK);
+        intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
         startActivity(intent);
     }
 }

@@ -1,6 +1,184 @@
 <?xml version="1.0" encoding="utf-8"?>
-<androidx.constraintlayout.widget.ConstraintLayout
-    xmlns:android="http://schemas.android.com/apk/res/android" android:layout_width="match_parent"
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
     android:layout_height="match_parent">
 
-</androidx.constraintlayout.widget.ConstraintLayout>
+    <LinearLayout
+        android:id="@+id/recommendTextview"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        android:padding="30dp">
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:fontFamily="@font/bmjua_ttf"
+            android:text="추천받고 싶은 알바생의 업종을"
+            android:textColor="#000000"
+            android:textSize="25sp" />
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:fontFamily="@font/bmjua_ttf"
+            android:text="선택해주세요"
+            android:textColor="#000000"
+            android:textSize="25sp" />
+    </LinearLayout>
+
+    <LinearLayout
+        android:id="@+id/layout4"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/recommendTextview"
+        android:layout_marginStart="20dp"
+        android:layout_marginTop="15dp"
+        android:orientation="horizontal"
+        android:padding="8dp">
+
+        <Button
+            android:id="@+id/rCafeButton"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:background="@drawable/button_round1"
+            android:fontFamily="@font/bmjua_ttf"
+            android:text="카페" />
+
+        <Button
+            android:id="@+id/rRestaurantButton"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="8dp"
+            android:background="@drawable/button_round1"
+            android:fontFamily="@font/bmjua_ttf"
+            android:text="음식점/주점" />
+
+        <Button
+            android:id="@+id/rCStoreButton"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="8dp"
+            android:background="@drawable/button_round1"
+            android:fontFamily="@font/bmjua_ttf"
+            android:text="편의점" />
+
+    </LinearLayout>
+
+    <LinearLayout
+        android:id="@+id/layout5"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/layout4"
+        android:layout_marginStart="20dp"
+        android:orientation="horizontal"
+        android:padding="8dp">
+
+        <Button
+            android:id="@+id/rAcademyButton"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:background="@drawable/button_round1"
+            android:fontFamily="@font/bmjua_ttf"
+            android:text="학원" />
+
+        <Button
+            android:id="@+id/rMartButton"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="8dp"
+            android:background="@drawable/button_round1"
+            android:fontFamily="@font/bmjua_ttf"
+            android:text="마트" />
+
+        <Button
+            android:id="@+id/rPcButton"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="8dp"
+            android:background="@drawable/button_round1"
+            android:fontFamily="@font/bmjua_ttf"
+            android:text="PC방" />
+
+    </LinearLayout>
+
+    <LinearLayout
+        android:id="@+id/layout6"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/layout5"
+        android:layout_marginStart="20dp"
+        android:orientation="horizontal"
+        android:padding="8dp">
+
+        <Button
+            android:id="@+id/rClothesButton"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:background="@drawable/button_round1"
+            android:fontFamily="@font/bmjua_ttf"
+            android:text="의류" />
+
+        <Button
+            android:id="@+id/rBeautyButton"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="8dp"
+            android:background="@drawable/button_round1"
+            android:fontFamily="@font/bmjua_ttf"
+            android:text="뷰티" />
+
+        <Button
+            android:id="@+id/rGymButton"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="8dp"
+            android:background="@drawable/button_round1"
+            android:fontFamily="@font/bmjua_ttf"
+            android:text="운동/헬스" />
+
+    </LinearLayout>
+
+    <LinearLayout
+        android:id="@+id/layout7"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/layout6"
+        android:layout_marginStart="20dp"
+        android:orientation="horizontal"
+        android:padding="8dp">
+
+        <Button
+            android:id="@+id/rCleanButton"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:background="@drawable/button_round1"
+            android:fontFamily="@font/bmjua_ttf"
+            android:text="청소/용역" />
+
+        <Button
+            android:id="@+id/rExtraButton"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="8dp"
+            android:background="@drawable/button_round1"
+            android:fontFamily="@font/bmjua_ttf"
+            android:text="기타" />
+
+    </LinearLayout>
+
+    <TextView
+        android:layout_marginTop="10dp"
+        android:id="@+id/recommendAlba"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/layout7"
+        android:text="추천받기!"
+        android:textSize="20dp"
+        android:gravity="center"
+        android:textColor="@color/black"
+        android:fontFamily="@font/bmjua_ttf"
+        android:textStyle="bold"
+        android:padding="50dp"/>
+
+</RelativeLayout>

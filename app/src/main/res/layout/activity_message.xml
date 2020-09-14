@@ -15,28 +15,30 @@
             android:id="@+id/backward"
             android:layout_width="30dp"
             android:layout_height="wrap_content"
-            android:src="@drawable/ic_icon"
+            android:layout_alignParentStart="true"
             android:padding="8dp"
-            android:layout_alignParentLeft="true"/>
+            android:src="@drawable/ic_backward" />
 
         <TextView
             android:id="@+id/chatRoomName"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            android:layout_centerInParent="true"
+            android:fontFamily="@font/jalnan"
+            android:padding="12dp"
             android:text="이름"
             android:textColor="#000000"
-            android:textStyle="bold"
-            android:padding="12dp"
-            android:layout_centerInParent="true"/>
+            android:textStyle="bold" />
 
         <Button
             android:id="@+id/matchButton"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="매칭 완료"
-            android:background="#ffffff"
-            android:layout_alignParentRight="true"
-            android:layout_gravity="center_vertical"/>
+            android:layout_alignParentEnd="true"
+            android:layout_gravity="center_vertical"
+            android:background="@drawable/button_round1"
+            android:fontFamily="@font/bmjua_ttf"
+            android:text="고용 성사" />
 
     </RelativeLayout>
 
@@ -47,9 +49,7 @@
         android:layout_above="@+id/messageActivity_btn"
         android:layout_below="@+id/chatTitle"
         android:layout_alignParentStart="true"
-        android:layout_alignParentLeft="true"
-        android:layout_alignParentEnd="true"
-        android:layout_alignParentRight="true">
+        android:layout_alignParentEnd="true">
 
     </androidx.recyclerview.widget.RecyclerView>
 
@@ -57,16 +57,18 @@
         android:id="@+id/messageActivity_et"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_alignParentLeft="true"
+        android:layout_alignParentStart="true"
         android:layout_alignParentBottom="true"
-        android:layout_toLeftOf="@+id/messageActivity_btn" />
+        android:layout_toStartOf="@+id/messageActivity_btn" />
 
     <Button
         android:id="@+id/messageActivity_btn"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_alignParentRight="true"
+        android:layout_alignParentEnd="true"
         android:layout_alignParentBottom="true"
+        android:background="@color/mainColor"
+        android:fontFamily="@font/bmjua_ttf"
         android:text="전송" />
 
 </RelativeLayout>

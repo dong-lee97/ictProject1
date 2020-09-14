@@ -31,16 +31,17 @@
                     android:layout_width="20dp"
                     android:layout_height="20dp"
                     android:layout_gravity="center_vertical"
-                    android:src="@drawable/ic_icon" />
+                    android:src="@drawable/ic_backward" />
 
                 <TextView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_gravity="center_vertical"
-                    android:layout_marginLeft="10dp"
+                    android:layout_marginStart="10dp"
+                    android:fontFamily="@font/jalnan"
                     android:text="이력서 작성"
                     android:textColor="#000000"
-                    android:textSize="20dp"
+                    android:textSize="20sp"
                     android:textStyle="bold" />
 
             </LinearLayout>
@@ -78,17 +79,18 @@
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_above="@+id/edit_text_file_name"
-                        android:layout_marginLeft="14dp"
+                        android:layout_marginStart="14dp"
+                        android:fontFamily="@font/bmjua_ttf"
                         android:text="이름"
                         android:textColor="#000000"
-                        android:textSize="15dp" />
+                        android:textSize="15sp" />
 
                     <EditText
                         android:id="@+id/edit_text_file_name"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:layout_above="@id/age"
-                        android:layout_marginLeft="10dp"
+                        android:layout_marginStart="10dp"
                         android:padding="8dp" />
 
                     <TextView
@@ -96,17 +98,18 @@
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_above="@+id/edit_text_age"
-                        android:layout_marginLeft="14dp"
+                        android:layout_marginStart="14dp"
+                        android:fontFamily="@font/bmjua_ttf"
                         android:text="나이"
                         android:textColor="#000000"
-                        android:textSize="15dp" />
+                        android:textSize="15sp" />
 
                     <EditText
                         android:id="@+id/edit_text_age"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:layout_alignParentBottom="true"
-                        android:layout_marginLeft="10dp"
+                        android:layout_marginStart="10dp"
                         android:padding="8dp" />
 
                 </RelativeLayout>
@@ -143,13 +146,14 @@
                         <ImageView
                             android:layout_width="30dp"
                             android:layout_height="30dp"
-                            android:src="@drawable/ic_sex"/>
+                            android:src="@drawable/ic_sex" />
 
                         <TextView
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:layout_gravity="center_vertical"
-                            android:layout_marginLeft="8dp"
+                            android:layout_marginStart="8dp"
+                            android:fontFamily="@font/bmjua_ttf"
                             android:text="성별"
                             android:textColor="#000000" />
 
@@ -162,25 +166,27 @@
                         android:orientation="horizontal">
 
                         <RadioButton
+                            android:id="@+id/man"
+                            android:fontFamily="@font/bmjua_ttf"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
-                            android:text="남"
-                            android:id="@+id/man"/>
+                            android:text="남" />
 
                         <RadioButton
-                            android:layout_marginLeft="5dp"
+                            android:id="@+id/woman"
+                            android:fontFamily="@font/bmjua_ttf"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
-                            android:text="여"
-                            android:id="@+id/woman"/>
+                            android:layout_marginStart="5dp"
+                            android:text="여" />
                     </RadioGroup>
 
                 </LinearLayout>
 
                 <LinearLayout
-                    android:layout_marginTop="10dp"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
+                    android:layout_marginTop="10dp"
                     android:orientation="vertical">
 
                     <LinearLayout
@@ -197,7 +203,8 @@
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:layout_gravity="center_vertical"
-                            android:layout_marginLeft="8dp"
+                            android:layout_marginStart="8dp"
+                            android:fontFamily="@font/bmjua_ttf"
                             android:text="경력"
                             android:textColor="#000000" />
 
@@ -206,10 +213,10 @@
                             android:layout_width="wrap_content"
                             android:layout_height="30dp"
                             android:layout_gravity="center_vertical"
-                            android:layout_marginLeft="5dp"
-                            android:background="@drawable/round"
+                            android:layout_marginStart="5dp"
+                            android:background="@drawable/button_round1"
                             android:text="저를 눌러주세요~"
-                            android:textSize="8dp" />
+                            android:textSize="8sp" />
                     </LinearLayout>
 
                     <TextView
@@ -218,7 +225,7 @@
                         android:layout_height="40dp"
                         android:gravity="center_vertical"
                         android:textColor="@color/black"
-                        android:textSize="15dp" />
+                        android:textSize="15sp" />
 
                 </LinearLayout>
 
@@ -242,7 +249,8 @@
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:layout_gravity="center_vertical"
-                            android:layout_marginLeft="8dp"
+                            android:layout_marginStart="8dp"
+                            android:fontFamily="@font/bmjua_ttf"
                             android:text="세부사항"
                             android:textColor="#000000" />
                     </LinearLayout>
@@ -252,7 +260,7 @@
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:hint="ex) 세븐일레븐 6개월"
-                        android:textSize="15dp" />
+                        android:textSize="15sp" />
 
                 </LinearLayout>
 
@@ -276,7 +284,8 @@
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:layout_gravity="center_vertical"
-                            android:layout_marginLeft="8dp"
+                            android:layout_marginStart="8dp"
+                            android:fontFamily="@font/bmjua_ttf"
                             android:text="근무 가능 지역"
                             android:textColor="#000000" />
 
@@ -285,10 +294,10 @@
                             android:layout_width="wrap_content"
                             android:layout_height="30dp"
                             android:layout_gravity="center_vertical"
-                            android:layout_marginLeft="5dp"
-                            android:background="@drawable/round"
+                            android:layout_marginStart="5dp"
+                            android:background="@drawable/button_round1"
                             android:text="저를 눌러주세요~"
-                            android:textSize="8dp" />
+                            android:textSize="8sp" />
 
                     </LinearLayout>
 
@@ -298,7 +307,7 @@
                         android:layout_height="40dp"
                         android:gravity="center_vertical"
                         android:textColor="@color/black"
-                        android:textSize="15dp" />
+                        android:textSize="15sp" />
 
                 </LinearLayout>
 
@@ -322,7 +331,8 @@
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:layout_gravity="center_vertical"
-                            android:layout_marginLeft="8dp"
+                            android:layout_marginStart="8dp"
+                            android:fontFamily="@font/bmjua_ttf"
                             android:text="희망 근무 일시"
                             android:textColor="#000000" />
                     </LinearLayout>
@@ -332,7 +342,7 @@
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:hint="ex) 2020년 5월 1일 ~ 12월 31일"
-                        android:textSize="15dp" />
+                        android:textSize="15sp" />
 
                 </LinearLayout>
 
@@ -366,10 +376,10 @@
                 <TextView
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:layout_marginLeft="20dp"
+                    android:layout_marginStart="20dp"
                     android:text="어디서 근무 가능하신가요?"
                     android:textColor="#BE000000"
-                    android:textSize="20dp"
+                    android:textSize="20sp"
                     android:textStyle="bold" />
 
             </LinearLayout>
@@ -379,7 +389,7 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_below="@+id/question1"
-                android:layout_marginLeft="16dp"
+                android:layout_marginStart="16dp"
                 android:padding="8dp"
                 android:textColor="@color/menuSelected" />
 
@@ -402,7 +412,7 @@
                         android:layout_gravity="center"
                         android:text="광역시/도"
                         android:textColor="@color/black"
-                        android:textSize="15dp"
+                        android:textSize="15sp"
                         android:textStyle="bold" />
 
                     <TextView
@@ -412,7 +422,7 @@
                         android:layout_gravity="center"
                         android:padding="5dp"
                         android:text="광역시"
-                        android:textSize="15dp"
+                        android:textSize="15sp"
                         android:textStyle="bold" />
 
                 </LinearLayout>
@@ -429,7 +439,7 @@
                         android:layout_gravity="center"
                         android:text="시"
                         android:textColor="@color/black"
-                        android:textSize="15dp"
+                        android:textSize="15sp"
                         android:textStyle="bold" />
 
                     <LinearLayout
@@ -446,7 +456,7 @@
                             android:layout_gravity="center"
                             android:padding="5dp"
                             android:text="서울"
-                            android:textSize="15dp"
+                            android:textSize="15sp"
                             android:textStyle="bold" />
 
                         <TextView
@@ -456,7 +466,7 @@
                             android:layout_gravity="center"
                             android:padding="5dp"
                             android:text="인천"
-                            android:textSize="15dp"
+                            android:textSize="15sp"
                             android:textStyle="bold" />
 
                         <TextView
@@ -466,7 +476,7 @@
                             android:layout_gravity="center"
                             android:padding="5dp"
                             android:text="대전"
-                            android:textSize="15dp"
+                            android:textSize="15sp"
                             android:textStyle="bold" />
 
                         <TextView
@@ -476,7 +486,7 @@
                             android:layout_gravity="center"
                             android:padding="5dp"
                             android:text="대구"
-                            android:textSize="15dp"
+                            android:textSize="15sp"
                             android:textStyle="bold" />
 
                         <TextView
@@ -486,7 +496,7 @@
                             android:layout_gravity="center"
                             android:padding="5dp"
                             android:text="울산"
-                            android:textSize="15dp"
+                            android:textSize="15sp"
                             android:textStyle="bold" />
 
                         <TextView
@@ -496,7 +506,7 @@
                             android:layout_gravity="center"
                             android:padding="5dp"
                             android:text="광주"
-                            android:textSize="15dp"
+                            android:textSize="15sp"
                             android:textStyle="bold" />
 
                         <TextView
@@ -506,7 +516,7 @@
                             android:layout_gravity="center"
                             android:padding="5dp"
                             android:text="부산"
-                            android:textSize="15dp"
+                            android:textSize="15sp"
                             android:textStyle="bold" />
                     </LinearLayout>
 
@@ -525,7 +535,7 @@
                         android:layout_gravity="center"
                         android:text="구/군"
                         android:textColor="@color/black"
-                        android:textSize="15dp"
+                        android:textSize="15sp"
                         android:textStyle="bold" />
 
                     <ListView
@@ -567,10 +577,10 @@
                 <TextView
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:layout_marginLeft="20dp"
+                    android:layout_marginStart="20dp"
                     android:text="어떤 업무를 해보셨나요?"
                     android:textColor="#BE000000"
-                    android:textSize="20dp"
+                    android:textSize="20sp"
                     android:textStyle="bold" />
 
             </LinearLayout>
@@ -580,7 +590,7 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_below="@+id/layout2"
-                android:layout_marginLeft="15dp"
+                android:layout_marginStart="15dp"
                 android:layout_marginTop="30dp"
                 android:orientation="horizontal">
 
@@ -605,7 +615,7 @@
                     android:id="@+id/restaurantButton"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:layout_marginLeft="5dp"
+                    android:layout_marginStart="5dp"
                     android:background="@drawable/round"
                     android:text="음식점/주점" />
 
@@ -613,7 +623,7 @@
                     android:id="@+id/cStoreButton"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:layout_marginLeft="5dp"
+                    android:layout_marginStart="5dp"
                     android:background="@drawable/round"
                     android:text="편의점" />
 
@@ -638,16 +648,15 @@
                     android:id="@+id/martButton"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:layout_marginLeft="5dp"
+                    android:layout_marginStart="5dp"
                     android:background="@drawable/round"
-                    android:text="마트"
-                    android:textSize="15dp" />
+                    android:text="마트" />
 
                 <Button
                     android:id="@+id/pcButton"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:layout_marginLeft="5dp"
+                    android:layout_marginStart="5dp"
                     android:background="@drawable/round"
                     android:text="PC방" />
 
@@ -672,16 +681,15 @@
                     android:id="@+id/beautyButton"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:layout_marginLeft="5dp"
+                    android:layout_marginStart="5dp"
                     android:background="@drawable/round"
-                    android:text="뷰티"
-                    android:textSize="15dp" />
+                    android:text="뷰티" />
 
                 <Button
                     android:id="@+id/gymButton"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:layout_marginLeft="5dp"
+                    android:layout_marginStart="5dp"
                     android:background="@drawable/round"
                     android:text="운동/헬스" />
 
@@ -706,7 +714,7 @@
                     android:id="@+id/extraButton"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:layout_marginLeft="5dp"
+                    android:layout_marginStart="5dp"
                     android:background="@drawable/round"
                     android:text="기타" />
 

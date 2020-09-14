@@ -52,11 +52,12 @@ public class CompanyInfo extends AppCompatActivity {
     private void cUploadFile() {
         if(cEditTextName.length()>0 && cEditTextPhone.length()>8) {
             FirebaseUser user = FirebaseAuth.getInstance().getCurrentUser();
+            String uid = user.getUid();
             CompanyUpload companyUpload = new CompanyUpload(cEditTextName.getText().toString().trim(),
-                    cEditTextPhone.getText().toString().trim(), user.getUid());
-            cDatabaseRef.child("company").child(user.getUid()).setValue(companyUpload);
+                    cEditTextPhone.getText().toString().trim(), uid);
+            cDatabaseRef.child("company").child(uid).setValue(companyUpload);
             Toast.makeText(CompanyInfo.this, "등록 성공", Toast.LENGTH_LONG).show();
-            myStartActivity(MainActivity.class);
+            myStartActivity(LoginActivity.class);
         } else{
             Toast.makeText(CompanyInfo.this, "등록 실패", Toast.LENGTH_LONG).show();
         }
@@ -64,7 +65,8 @@ public class CompanyInfo extends AppCompatActivity {
 
     private void myStartActivity(Class c) {
         Intent intent = new Intent(this, c);
-        intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
+        intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TASK);
+        intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
         startActivity(intent);
     }
 }

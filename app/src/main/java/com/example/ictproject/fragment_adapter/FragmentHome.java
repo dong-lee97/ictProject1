@@ -2,8 +2,6 @@ package com.example.ictproject.fragment_adapter;
 
 import android.content.Intent;
 import android.os.Bundle;
-import android.provider.MediaStore;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -11,11 +9,8 @@ import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.ImageView;
-import android.widget.RadioButton;
-import android.widget.RadioGroup;
 import android.widget.RelativeLayout;
 import android.widget.Spinner;
-import android.widget.TextView;
 import android.widget.Toast;
 import androidx.annotation.NonNull;
 import androidx.fragment.app.Fragment;
@@ -32,7 +27,6 @@ import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
-
 import java.util.ArrayList;
 import java.util.Objects;
 
@@ -65,7 +59,7 @@ public class FragmentHome extends Fragment {
         r_resume = rootView.findViewById(R.id.r_resume);
         ImageView filter = rootView.findViewById(R.id.filter);
 
-        TextView okay = rootView.findViewById(R.id.fExperienceOk);
+        Button okay = rootView.findViewById(R.id.fExperienceOk);
         final Button cStore = rootView.findViewById(R.id.fcStoreButton);
         final Button cafe = rootView.findViewById(R.id.fCafeButton);
         final Button restaurant = rootView.findViewById(R.id.fRestaurantButton);
@@ -111,7 +105,7 @@ public class FragmentHome extends Fragment {
 
                 for (DataSnapshot postSnapshot : dataSnapshot.child("employee").getChildren()) {
                     Upload upload = postSnapshot.getValue(Upload.class);
-                    if (upload.getName() == null) {
+                    if (upload.getExperience() == null) {
 
                     } else {
                         mUploads.add(upload);
@@ -130,7 +124,7 @@ public class FragmentHome extends Fragment {
         mDatabaseRef.addValueEventListener(new ValueEventListener() {
             @Override
             public void onDataChange(DataSnapshot dataSnapshot) {
-                if (dataSnapshot.child("employee").hasChild(uid) || dataSnapshot.child("company").hasChild(uid)) {
+                if (dataSnapshot.child("employee").child(uid).hasChild("experience") || dataSnapshot.child("company").hasChild(uid)) {
                     r_resume.setEnabled(false);
                 } else {
                     r_resume.setOnClickListener(new View.OnClickListener() {

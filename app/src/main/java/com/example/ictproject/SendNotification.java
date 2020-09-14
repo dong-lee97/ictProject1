@@ -4,11 +4,8 @@ import android.os.AsyncTask;
 import android.util.Log;
 
 import com.example.ictproject.upload.CompanyUpload;
-import com.example.ictproject.upload.Upload;
 import com.google.gson.Gson;
-
 import org.json.JSONObject;
-
 import okhttp3.MediaType;
 import okhttp3.OkHttpClient;
 import okhttp3.Request;
@@ -32,12 +29,6 @@ public class SendNotification {
 
                     if(object instanceof CompanyUpload) { //회사에서 연락할 경우
                         type = "companyUpload";
-                        dataJson.put("type", type);
-                        dataJson.put("body", message);
-                        dataJson.put("title", title);
-                        dataJson.put("click_action", "OPEN_ACTIVITY");
-                    } else if(object instanceof Upload) { //개인이 연락할 경우
-                        type = "upload";
                         dataJson.put("type", type);
                         dataJson.put("body", message);
                         dataJson.put("title", title);

@@ -5,7 +5,6 @@ import androidx.appcompat.app.AppCompatActivity;
 
 import android.content.Intent;
 import android.os.Bundle;
-import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
@@ -46,7 +45,7 @@ public class ConnectActivity extends AppCompatActivity {
         company = findViewById(R.id.rCompanyName);
         phone = findViewById(R.id.rCompanyPhone);
 
-        DatabaseReference cDatabaseRef = FirebaseDatabase.getInstance().getReference("user");
+        final DatabaseReference cDatabaseRef = FirebaseDatabase.getInstance().getReference("user");
         collectionReference = FirebaseFirestore.getInstance().collection("token");
         FirebaseUser user = FirebaseAuth.getInstance().getCurrentUser();
         uid = user.getUid();
@@ -60,8 +59,8 @@ public class ConnectActivity extends AppCompatActivity {
             public void onDataChange(@NonNull final DataSnapshot dataSnapshot) {
                 if (dataSnapshot.child("company").hasChild(uid)) {
                     cUpload = dataSnapshot.child("company").child(uid).getValue(CompanyUpload.class);
-                    company.setText(cUpload.getCName());
-                    phone.setText(cUpload.getCPhone());
+                    company.setText(cUpload.getCompanyName());
+                    phone.setText(cUpload.getCompanyPhone());
 
                     button2.setOnClickListener(new View.OnClickListener() {
                         @Override
@@ -70,25 +69,28 @@ public class ConnectActivity extends AppCompatActivity {
                                 @Override
                                 public void onSuccess(DocumentSnapshot documentSnapshot) {
                                     mPushToken = documentSnapshot.getString("pushToken");
-                                    SendNotification.sendNotification(mPushToken, "shareAbility", cUpload.getCName() + "에서 연락이 왔습니다!" , cUpload);
+                                    SendNotification.sendNotification(mPushToken, "shareAbility", cUpload.getCompanyName() + "에서 연락이 왔습니다!" , cUpload);
                                     finish();
                                 }
                             });
                         }
                     });
                 } else {
-                    mUpload = dataSnapshot.child("employee").child(uid).getValue(Upload.class);
-                    company.setText(mUpload.getCompanyName());
-                    phone.setText(mUpload.getCompanyPhone());
-
                     button2.setOnClickListener(new View.OnClickListener() {
                         @Override
                         public void onClick(View v) {
+                            mUpload = dataSnapshot.child("employee").child(uid).getValue(Upload.class);
+                            String companyName = company.getText().toString().trim()+"(대타)";
+                            String phoneNumber = phone.getText().toString().trim();
+                            cUpload = new CompanyUpload(mUpload.getName(), companyName, phoneNumber, uid);
+                            cDatabaseRef.child("company").child(uid).setValue(cUpload);
+                            cDatabaseRef.child("employee").child(uid).removeValue();
+
                             collectionReference.document(ResumeUid).get().addOnSuccessListener(new OnSuccessListener<DocumentSnapshot>() {
                                 @Override
                                 public void onSuccess(DocumentSnapshot documentSnapshot) {
                                     mPushToken = documentSnapshot.getString("pushToken");
-                                    SendNotification.sendNotification(mPushToken, "shareAbility", mUpload.getCompanyName() + "에서 연락이 왔습니다!" , mUpload);
+                                    SendNotification.sendNotification(mPushToken, "shareAbility", cUpload.getCompanyName() + "에서 연락이 왔습니다!" , cUpload);
                                     finish();
                                 }
                             });

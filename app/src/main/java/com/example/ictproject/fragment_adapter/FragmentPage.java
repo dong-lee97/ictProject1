@@ -39,7 +39,6 @@ public class FragmentPage extends Fragment {
     private String uid;
     private DatabaseReference dataRef;
     private StorageReference mStorageRef;
-    private Context context;
 
     public FragmentPage() {
         // Required empty public constructor
@@ -71,9 +70,7 @@ public class FragmentPage extends Fragment {
                     } else if (dataSnapshot.child("company").hasChild(uid)){
                         CompanyUpload upload = dataSnapshot.child("company").child(uid).getValue(CompanyUpload.class);
                         imageView.setImageResource(R.drawable.ic_person);
-                        name.setText(upload.getCName());
-                    } else {
-
+                        name.setText(upload.getCompanyName());
                     }
                 }
             }

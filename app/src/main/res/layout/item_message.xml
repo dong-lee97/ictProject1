@@ -6,10 +6,10 @@
     android:orientation="horizontal">
 
     <de.hdodenhof.circleimageview.CircleImageView
-        android:layout_marginTop="4dp"
+        android:id="@+id/chatProfile"
         android:layout_width="30dp"
         android:layout_height="30dp"
-        android:id="@+id/chatProfile"/>
+        android:layout_marginTop="4dp" />
 
     <RelativeLayout
         android:layout_width="wrap_content"
@@ -26,15 +26,17 @@
                 android:id="@+id/messageItem_tvName"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
+                android:fontFamily="@font/bmjua_ttf"
                 android:text="이름" />
 
         </LinearLayout>
 
         <TextView
-            android:layout_below="@id/messageItem_llDestination"
             android:id="@+id/messageItem_tvMessage"
             android:layout_width="wrap_content"
-            android:layout_height="wrap_content" />
+            android:layout_height="wrap_content"
+            android:layout_below="@id/messageItem_llDestination"
+            android:fontFamily="@font/bmjua_ttf" />
 
     </RelativeLayout>
 

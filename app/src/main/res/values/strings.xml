@@ -12,7 +12,7 @@
     <string name="login_failed">"Login failed"</string>
     <string name="default_notification_channel_id">default_notification_channel_id</string>
 
-    <string-array name = "spinner_age">
+    <string-array name="spinner_age">
         <item>전체</item>
         <item>20~22</item>
         <item>23~26</item>
@@ -21,22 +21,22 @@
         <item>35세 이상</item>
     </string-array>
 
-    <string-array name = "spinner_sex">
+    <string-array name="spinner_sex">
         <item>전체</item>
         <item>남</item>
         <item>여</item>
     </string-array>
 
-    <string-array name = "spinner_nothing">
+    <string-array name="spinner_nothing">
         <item></item>
     </string-array>
 
-    <string-array name = "spinner_whole">
+    <string-array name="spinner_whole">
         <item>전체</item>
         <item>광역시</item>
     </string-array>
 
-    <string-array name = "spinner_do">
+    <string-array name="spinner_do">
         <item>시</item>
         <item>서울</item>
         <item>인천</item>
@@ -47,7 +47,7 @@
         <item>광주</item>
     </string-array>
 
-    <string-array name = "spinner_do_seoul">
+    <string-array name="spinner_do_seoul">
         <item>전체</item>
         <item>강남구</item>
         <item>강동구</item>
@@ -76,7 +76,7 @@
         <item>중랑구</item>
     </string-array>
 
-    <string-array name = "spinner_do_incheon">
+    <string-array name="spinner_do_incheon">
         <item>전체</item>
         <item>강화군</item>
         <item>계양구</item>
@@ -90,7 +90,7 @@
         <item>중구</item>
     </string-array>
 
-    <string-array name = "spinner_do_daejeon">
+    <string-array name="spinner_do_daejeon">
         <item>전체</item>
         <item>대덕구</item>
         <item>동구</item>
@@ -99,7 +99,7 @@
         <item>중구</item>
     </string-array>
 
-    <string-array name = "spinner_do_daegu">
+    <string-array name="spinner_do_daegu">
         <item>전체</item>
         <item>남구</item>
         <item>달서구</item>
@@ -110,7 +110,7 @@
         <item>수성구</item>
     </string-array>
 
-    <string-array name = "spinner_do_ulsan">
+    <string-array name="spinner_do_ulsan">
         <item>전체</item>
         <item>남구</item>
         <item>동구</item>
@@ -119,7 +119,7 @@
         <item>중구</item>
     </string-array>
 
-    <string-array name = "spinner_do_gwangju">
+    <string-array name="spinner_do_gwangju">
         <item>전체</item>
         <item>광산구</item>
         <item>남구</item>
@@ -128,7 +128,7 @@
         <item>서구</item>
     </string-array>
 
-    <string-array name = "spinner_do_busan">
+    <string-array name="spinner_do_busan">
         <item>전체</item>
         <item>강서구</item>
         <item>금정구</item>

@@ -15,12 +15,12 @@
         android:roundIcon="@mipmap/ic_main_round"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
+        <activity
+            android:name=".activity.RecommendDataActivity"
+            android:theme="@style/Transparent" />
         <activity android:name=".activity.MessageActivity" />
         <activity
             android:name=".activity.ConnectActivity"
-            android:theme="@style/Transparent" />
-        <activity
-            android:name=".activity.ConnectActivity1"
             android:theme="@style/Transparent" />
         <activity android:name=".activity.AcceptActivity">
             <intent-filter>
@@ -29,12 +29,13 @@
                 <category android:name="android.intent.category.DEFAULT" />
             </intent-filter>
         </activity>
-        <activity android:name=".activity.CompanyInfo" />
+        <activity android:name=".activity.CompanyInfo"/>
         <activity android:name=".activity.RegisterActivity" />
         <activity android:name=".activity.LoginActivity" />
         <activity android:name=".activity.SelectIdentity" />
-        <activity android:name=".activity.Resume_register"
-            android:windowSoftInputMode="stateAlwaysHidden"/>
+        <activity
+            android:name=".activity.Resume_register"
+            android:windowSoftInputMode="stateAlwaysHidden" />
         <activity android:name=".activity.CompanyRegister" />
         <activity android:name=".FirstLoadingPage">
             <intent-filter>

@@ -144,7 +144,7 @@ public class Resume_revise extends AppCompatActivity {
                             while (!urlTask.isSuccessful()) ;
                             Uri downloadUrl = urlTask.getResult();
                             Upload upload = new Upload(mEditTextFileName.getText().toString().trim(), downloadUrl.toString(), mEditTextAge.getText().toString().trim(), sex,
-                                    mExperience.getText().toString().trim(), mDetail.getText().toString().trim(), mRegion.getText().toString().trim(), mDay.getText().toString().trim(), uid, "", "");
+                                    mExperience.getText().toString().trim(), mDetail.getText().toString().trim(), mRegion.getText().toString().trim(), mDay.getText().toString().trim(), uid);
                             mDatabaseRef.child("employee").child(uid).setValue(upload);
                             finish();
                         }

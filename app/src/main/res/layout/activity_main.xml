@@ -19,6 +19,7 @@
         android:background="?android:attr/windowBackground"
         app:itemIconTint="@color/mainColor"
         app:itemTextColor="@color/mainColor"
+        android:theme="@style/Widget.BottomNavigationView"
         app:menu="@menu/menu_bottomnavigationview"
         android:id="@+id/navigationView"/>
 

@@ -32,17 +32,17 @@ import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
+
 import java.util.ArrayList;
 import java.util.List;
 
 public class MessageActivity extends AppCompatActivity {
 
-    private String destinationUid, chatRoomUid, uid,  phoneNum;
+    private String destinationUid, chatRoomUid, uid, phoneNum;
     private Button button, matchButton;
     private EditText editText;
     private RecyclerView recyclerView;
     private TextView textView;
-    private Upload mUploads;
     private CompanyUpload cUploads;
 
     @Override
@@ -72,10 +72,10 @@ public class MessageActivity extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 ChatModel chatModel = new ChatModel();
-                chatModel.users.put(uid,true);
-                chatModel.users.put(destinationUid,true);
+                chatModel.users.put(uid, true);
+                chatModel.users.put(destinationUid, true);
 
-                if(chatRoomUid == null){
+                if (chatRoomUid == null) {
                     button.setEnabled(false);
                     FirebaseDatabase.getInstance().getReference().child("chatRooms").push().setValue(chatModel).addOnSuccessListener(new OnSuccessListener<Void>() {
                         @Override
@@ -83,7 +83,7 @@ public class MessageActivity extends AppCompatActivity {
                             checkChatRoom();
                         }
                     });
-                } else{
+                } else {
                     ChatModel.Comment comment = new ChatModel.Comment();
                     comment.uid = uid;
                     comment.message = editText.getText().toString();
@@ -109,19 +109,14 @@ public class MessageActivity extends AppCompatActivity {
                         } else {
                             if (dataSnapshot.child("company").hasChild(destinationUid)) {
                                 cUploads = dataSnapshot.child("company").child(destinationUid).getValue(CompanyUpload.class);
-                                phoneNum = cUploads.getCPhone().trim();
-
-                            } else {
-                                mUploads = dataSnapshot.child("employee").child(destinationUid).getValue(Upload.class);
-                                phoneNum = mUploads.getCompanyPhone().trim();
+                                phoneNum = cUploads.getCompanyPhone().trim();
                             }
 
-                            try{
+                            try {
                                 SmsManager smgr = SmsManager.getDefault();
                                 smgr.sendTextMessage(phoneNum, null, "안녕하세요, 이번에 쉐어빌리티를 통해 근무하게 되어 연락드립니다", null, null);
                                 Toast.makeText(MessageActivity.this, "메시지를 성공적으로 전송하였습니다.", Toast.LENGTH_SHORT).show();
-                            }
-                            catch (Exception e) {
+                            } catch (Exception e) {
                                 Toast.makeText(MessageActivity.this, "메시지 전송을 실패하였습니다.", Toast.LENGTH_SHORT).show();
                             }
                         }
@@ -137,13 +132,13 @@ public class MessageActivity extends AppCompatActivity {
 
     }
 
-    void checkChatRoom(){
-        FirebaseDatabase.getInstance().getReference().child("chatRooms").orderByChild("users/"+uid).equalTo(true).addListenerForSingleValueEvent(new ValueEventListener() {
+    void checkChatRoom() {
+        FirebaseDatabase.getInstance().getReference().child("chatRooms").orderByChild("users/" + uid).equalTo(true).addListenerForSingleValueEvent(new ValueEventListener() {
             @Override
             public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
-                for(DataSnapshot item : dataSnapshot.getChildren()){
+                for (DataSnapshot item : dataSnapshot.getChildren()) {
                     ChatModel chatModel = item.getValue(ChatModel.class); // 파이어베이스 chatRooms 하의 db 받아옴
-                    if(chatModel.users.containsKey(destinationUid)){
+                    if (chatModel.users.containsKey(destinationUid)) {
                         chatRoomUid = item.getKey(); // 채팅방 고유값
                         button.setEnabled(true);
 
@@ -160,7 +155,7 @@ public class MessageActivity extends AppCompatActivity {
         });
     }
 
-    class RecyclerViewAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder>{
+    class RecyclerViewAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder> {
 
         List<ChatModel.Comment> comments;
         Upload mUploads;
@@ -173,7 +168,7 @@ public class MessageActivity extends AppCompatActivity {
             FirebaseDatabase.getInstance().getReference().child("user").child(destinationUid).addListenerForSingleValueEvent(new ValueEventListener() {
                 @Override
                 public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
-                    if(dataSnapshot.child("employee").hasChild(destinationUid)) {
+                    if (dataSnapshot.child("employee").hasChild(destinationUid)) {
                         mUploads = dataSnapshot.getValue(Upload.class);
                         getMessageList();
                     } else {
@@ -189,20 +184,17 @@ public class MessageActivity extends AppCompatActivity {
             });
         }
 
-        void getMessageList(){
+        void getMessageList() {
             FirebaseDatabase.getInstance().getReference().child("chatRooms").child(chatRoomUid).child("comments").addValueEventListener(new ValueEventListener() {
                 @Override
                 public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
-                    comments.clear(); // 데이터 추가될 떄마다 모든 대화내용을 받아오기 때문에 이 코드 없으면 데이터 계속 쌓임
-
-                    for(DataSnapshot item : dataSnapshot.getChildren()){
+                    comments.clear();
+                    for (DataSnapshot item : dataSnapshot.getChildren()) {
                         comments.add(item.getValue(ChatModel.Comment.class));
                     }
-                    // 신규 메시지 생성 시 새로고침
                     notifyDataSetChanged();
-                    recyclerView.scrollToPosition(comments.size() -1); // 스크롤도 맨 아래로 가서 신규 메시지 보이도록
+                    recyclerView.scrollToPosition(comments.size() - 1);
                 }
-
                 @Override
                 public void onCancelled(@NonNull DatabaseError databaseError) {
 
@@ -213,68 +205,23 @@ public class MessageActivity extends AppCompatActivity {
         @NonNull
         @Override
         public RecyclerView.ViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
-            View view = LayoutInflater.from(parent.getContext()).inflate(R.layout.item_message,parent,false);
+            View view = LayoutInflater.from(parent.getContext()).inflate(R.layout.item_message, parent, false);
             return new MessageViewHolder(view);
         }
 
         @Override
         public void onBindViewHolder(@NonNull RecyclerView.ViewHolder holder, final int position) {
-            final MessageViewHolder messageViewHolder = ((MessageViewHolder)holder);
+            final MessageViewHolder messageViewHolder = ((MessageViewHolder) holder);
 
             // 업체 구직자 구별 필요?
             FirebaseDatabase.getInstance().getReference("user").addListenerForSingleValueEvent(new ValueEventListener() {
                 @Override
                 public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
                     // 대화 상대방이 구직자일 때
-                    if(dataSnapshot.child("employee").hasChild(destinationUid)){
+                    if (dataSnapshot.child("employee").hasChild(destinationUid)) {
                         mUploads = dataSnapshot.child("employee").child(destinationUid).getValue(Upload.class);
-                        if (mUploads.getName() == null) {
-                            textView.setText(mUploads.getCompanyName());
-
-                            if (comments.get(position).uid.equals(uid)){
-                                messageViewHolder.chatProfile.setVisibility(View.INVISIBLE);
-                                messageViewHolder.tvMessage.setText(comments.get(position).message);
-                                messageViewHolder.tvMessage.setBackgroundResource(R.drawable.rightbubble);
-                                messageViewHolder.llDestination.setVisibility(View.INVISIBLE); // 내 메시지는 상대방이 볼 필요 없으므로
-                                messageViewHolder.llMain.setGravity(Gravity.RIGHT); // 내 메시지 우측 정렬
-
-                            } else {
-                                messageViewHolder.chatProfile.setImageResource(R.drawable.ic_person);
-                                messageViewHolder.tvName.setText(mUploads.getCompanyName());
-                                messageViewHolder.tvMessage.setBackgroundResource(R.drawable.leftbubble);
-                                messageViewHolder.llDestination.setVisibility(View.VISIBLE);
-                                messageViewHolder.tvMessage.setText(comments.get(position).message);
-                                messageViewHolder.llMain.setGravity(Gravity.LEFT); // 상대 메시지 좌측 정렬
-                            }
-                            messageViewHolder.tvMessage.setTextSize(15);
-                        } else {
-                            textView.setText(mUploads.getName());
-                            if (comments.get(position).uid.equals(uid)){
-                                messageViewHolder.chatProfile.setVisibility(View.INVISIBLE);
-                                messageViewHolder.tvMessage.setText(comments.get(position).message);
-                                messageViewHolder.tvMessage.setBackgroundResource(R.drawable.rightbubble);
-                                messageViewHolder.llDestination.setVisibility(View.INVISIBLE); // 내 메시지는 상대방이 볼 필요 없으므로
-                                messageViewHolder.llMain.setGravity(Gravity.RIGHT); // 내 메시지 우측 정렬
-
-                            } else {
-                                messageViewHolder.tvName.setText(mUploads.getName());
-                                messageViewHolder.tvMessage.setBackgroundResource(R.drawable.leftbubble);
-                                messageViewHolder.llDestination.setVisibility(View.VISIBLE);
-                                messageViewHolder.tvMessage.setText(comments.get(position).message);
-                                messageViewHolder.llMain.setGravity(Gravity.LEFT);
-                                Glide.with(getApplicationContext())
-                                        .load(mUploads.getImageUrl())
-                                        .fitCenter()
-                                        .into(messageViewHolder.chatProfile);
-                            }
-                            messageViewHolder.tvMessage.setTextSize(15);
-                        }
-
-                        // 대화 상대방이 업체일 때
-                    } else {
-                        cUploads = dataSnapshot.child("company").child(destinationUid).getValue(CompanyUpload.class);
-                        textView.setText(cUploads.getCName());
-                        if(comments.get(position).uid.equals(uid)){
+                        textView.setText(mUploads.getName());
+                        if (comments.get(position).uid.equals(uid)) {
                             messageViewHolder.chatProfile.setVisibility(View.INVISIBLE);
                             messageViewHolder.tvMessage.setText(comments.get(position).message);
                             messageViewHolder.tvMessage.setBackgroundResource(R.drawable.rightbubble);
@@ -282,10 +229,33 @@ public class MessageActivity extends AppCompatActivity {
                             messageViewHolder.llMain.setGravity(Gravity.RIGHT); // 내 메시지 우측 정렬
 
                         } else {
-                            messageViewHolder.tvName.setText(cUploads.getCName());
+                            messageViewHolder.tvName.setText(mUploads.getName());
                             messageViewHolder.tvMessage.setBackgroundResource(R.drawable.leftbubble);
                             messageViewHolder.llDestination.setVisibility(View.VISIBLE);
-                            messageViewHolder.chatProfile.setImageResource(R.drawable.ic_person);
+                            messageViewHolder.tvMessage.setText(comments.get(position).message);
+                            messageViewHolder.llMain.setGravity(Gravity.LEFT);
+                            Glide.with(getApplicationContext())
+                                    .load(mUploads.getImageUrl())
+                                    .fitCenter()
+                                    .into(messageViewHolder.chatProfile);
+                        }
+                        messageViewHolder.tvMessage.setTextSize(15);
+                        // 대화 상대방이 업체일 때
+                    } else {
+                        cUploads = dataSnapshot.child("company").child(destinationUid).getValue(CompanyUpload.class);
+                        textView.setText(cUploads.getCompanyName());
+                        if (comments.get(position).uid.equals(uid)) {
+                            messageViewHolder.chatProfile.setVisibility(View.INVISIBLE);
+                            messageViewHolder.tvMessage.setText(comments.get(position).message);
+                            messageViewHolder.tvMessage.setBackgroundResource(R.drawable.rightbubble);
+                            messageViewHolder.llDestination.setVisibility(View.INVISIBLE); // 내 메시지는 상대방이 볼 필요 없으므로
+                            messageViewHolder.llMain.setGravity(Gravity.RIGHT); // 내 메시지 우측 정렬
+
+                        } else {
+                            messageViewHolder.tvName.setText(cUploads.getCompanyName());
+                            messageViewHolder.tvMessage.setBackgroundResource(R.drawable.leftbubble);
+                            messageViewHolder.llDestination.setVisibility(View.VISIBLE);
+                            messageViewHolder.chatProfile.setImageResource(R.drawable.ic_burgerking);
                             messageViewHolder.tvMessage.setText(comments.get(position).message);
                             messageViewHolder.llMain.setGravity(Gravity.LEFT); // 상대 메시지 좌측 정렬
                         }
@@ -317,10 +287,10 @@ public class MessageActivity extends AppCompatActivity {
 
             public MessageViewHolder(View view) {
                 super(view);
-                llDestination = (LinearLayout)view.findViewById(R.id.messageItem_llDestination);
+                llDestination = (LinearLayout) view.findViewById(R.id.messageItem_llDestination);
                 tvMessage = view.findViewById(R.id.messageItem_tvMessage);
                 tvName = view.findViewById(R.id.messageItem_tvName);
-                llMain = (LinearLayout)view.findViewById(R.id.messageItem_llMain); // 채팅창 정렬에 쓰임
+                llMain = (LinearLayout) view.findViewById(R.id.messageItem_llMain); // 채팅창 정렬에 쓰임
                 chatProfile = view.findViewById(R.id.chatProfile);
             }
         }

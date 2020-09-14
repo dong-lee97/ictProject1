@@ -9,19 +9,33 @@
         android:layout_height="wrap_content"
         android:orientation="vertical">
 
-        <ImageView
+        <RelativeLayout
             android:layout_width="match_parent"
-            android:layout_height="110dp"
-            android:id="@+id/image_view_upload"/>
+            android:layout_height="wrap_content">
+
+            <ImageView
+                android:layout_width="match_parent"
+                android:layout_height="110dp"
+                android:id="@+id/image_view_upload"/>
+
+            <ImageView
+                android:layout_width="25dp"
+                android:layout_height="25dp"
+                android:layout_alignParentEnd="true"
+                android:src="@drawable/ic_medal"/>
+
+
+        </RelativeLayout>
 
         <TextView
+            android:fontFamily="@font/bmjua_ttf"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="name"
             android:textColor="#000000"
-            android:textSize="15dp"
+            android:textSize="15sp"
             android:id="@+id/text_view_name"
-            android:layout_marginLeft="4dp"
+            android:layout_marginStart="4dp"
             android:layout_marginTop="4dp"
             android:layout_marginBottom="4dp"/>
 
@@ -34,16 +48,17 @@
                 android:layout_width="10dp"
                 android:layout_height="15dp"
                 android:src="@drawable/ic_profile"
-                android:layout_marginLeft="4dp"/>
+                android:layout_marginStart="4dp"/>
 
             <TextView
                 android:id="@+id/text_view_experience"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
+                android:fontFamily="@font/bmjua_ttf"
                 android:text="experience"
-                android:textSize="10dp"
+                android:textSize="12sp"
                 android:gravity="center_vertical"
-                android:layout_marginLeft="2dp"/>
+                android:layout_marginStart="2dp"/>
         </LinearLayout>
 
         <LinearLayout
@@ -55,16 +70,17 @@
                 android:layout_width="10dp"
                 android:layout_height="15dp"
                 android:src="@drawable/ic_address"
-                android:layout_marginLeft="4dp"/>
+                android:layout_marginStart="4dp"/>
 
             <TextView
                 android:id="@+id/text_view_region"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="region"
-                android:textSize="10dp"
+                android:fontFamily="@font/bmjua_ttf"
+                android:textSize="12sp"
                 android:gravity="center_vertical"
-                android:layout_marginLeft="2dp"/>
+                android:layout_marginStart="2dp"/>
         </LinearLayout>
 
         <LinearLayout
@@ -76,16 +92,17 @@
                 android:layout_width="10dp"
                 android:layout_height="15dp"
                 android:src="@drawable/ic_calender"
-                android:layout_marginLeft="4dp"/>
+                android:layout_marginStart="4dp"/>
 
             <TextView
                 android:id="@+id/text_view_day"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="day"
-                android:textSize="10dp"
+                android:textSize="12sp"
+                android:fontFamily="@font/bmjua_ttf"
                 android:gravity="center_vertical"
-                android:layout_marginLeft="2dp"/>
+                android:layout_marginStart="2dp"/>
         </LinearLayout>
 
     </LinearLayout>

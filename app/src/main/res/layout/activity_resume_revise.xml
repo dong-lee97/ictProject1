@@ -18,16 +18,17 @@
             android:layout_width="20dp"
             android:layout_height="20dp"
             android:layout_gravity="center_vertical"
-            android:src="@drawable/ic_icon" />
+            android:src="@drawable/ic_backward" />
 
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_gravity="center_vertical"
-            android:layout_marginLeft="10dp"
+            android:layout_marginStart="10dp"
+            android:fontFamily="@font/jalnan"
             android:text="이력서 수정"
             android:textColor="#000000"
-            android:textSize="20dp"
+            android:textSize="20sp"
             android:textStyle="bold" />
 
     </LinearLayout>
@@ -53,7 +54,6 @@
             android:id="@+id/image_view1"
             android:layout_width="110dp"
             android:layout_height="110dp"
-            android:layout_below="@+id/w"
             android:layout_marginTop="6dp"
             android:layout_marginBottom="8dp"
             android:src="@drawable/ic_photo" />
@@ -66,17 +66,18 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_above="@+id/edit_text_file_name1"
-                android:layout_marginLeft="14dp"
+                android:layout_marginStart="14dp"
+                android:fontFamily="@font/bmjua_ttf"
                 android:text="이름"
                 android:textColor="#000000"
-                android:textSize="15dp" />
+                android:textSize="15sp" />
 
             <EditText
                 android:id="@+id/edit_text_file_name1"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_marginLeft="10dp"
                 android:layout_above="@id/age"
+                android:layout_marginStart="10dp"
                 android:padding="8dp" />
 
             <TextView
@@ -84,18 +85,19 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_above="@+id/edit_text_age1"
-                android:layout_marginLeft="14dp"
+                android:layout_marginStart="14dp"
+                android:fontFamily="@font/bmjua_ttf"
                 android:text="나이"
                 android:textColor="#000000"
-                android:textSize="15dp" />
+                android:textSize="15sp" />
 
             <EditText
                 android:id="@+id/edit_text_age1"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_marginLeft="10dp"
-                android:padding="8dp"
-                android:layout_alignParentBottom="true"/>
+                android:layout_alignParentBottom="true"
+                android:layout_marginStart="10dp"
+                android:padding="8dp" />
 
         </RelativeLayout>
 
@@ -111,10 +113,10 @@
         android:orientation="vertical" />
 
     <LinearLayout
+        android:id="@+id/fixResumeLayout"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:layout_below="@+id/line2"
-        android:layout_above="@+id/button_upload"
         android:layout_marginTop="8dp"
         android:orientation="vertical">
 
@@ -137,7 +139,8 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_gravity="center_vertical"
-                    android:layout_marginLeft="8dp"
+                    android:layout_marginStart="8dp"
+                    android:fontFamily="@font/bmjua_ttf"
                     android:text="경력"
                     android:textColor="#000000" />
             </LinearLayout>
@@ -145,7 +148,7 @@
             <EditText
                 android:id="@+id/experience1"
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content"/>
+                android:layout_height="wrap_content" />
 
         </LinearLayout>
 
@@ -168,7 +171,8 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_gravity="center_vertical"
-                    android:layout_marginLeft="8dp"
+                    android:layout_marginStart="8dp"
+                    android:fontFamily="@font/bmjua_ttf"
                     android:text="세부사항"
                     android:textColor="#000000" />
             </LinearLayout>
@@ -184,8 +188,8 @@
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:orientation="vertical"
-            android:layout_marginTop="10dp">
+            android:layout_marginTop="10dp"
+            android:orientation="vertical">
 
             <LinearLayout
                 android:layout_width="match_parent"
@@ -201,7 +205,8 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_gravity="center_vertical"
-                    android:layout_marginLeft="8dp"
+                    android:layout_marginStart="8dp"
+                    android:fontFamily="@font/bmjua_ttf"
                     android:text="근무 가능 지역"
                     android:textColor="#000000" />
             </LinearLayout>
@@ -217,8 +222,8 @@
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:orientation="vertical"
-            android:layout_marginTop="10dp">
+            android:layout_marginTop="10dp"
+            android:orientation="vertical">
 
             <LinearLayout
                 android:layout_width="match_parent"
@@ -234,7 +239,8 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_gravity="center_vertical"
-                    android:layout_marginLeft="8dp"
+                    android:layout_marginStart="8dp"
+                    android:fontFamily="@font/bmjua_ttf"
                     android:text="희망 근무 일시"
                     android:textColor="#000000" />
             </LinearLayout>
@@ -243,18 +249,20 @@
                 android:id="@+id/possible_day1"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:hint="ex) 2020년 5월 1일 ~ 12월 31일"/>
+                android:hint="ex) 2020년 5월 1일 ~ 12월 31일" />
 
         </LinearLayout>
 
+        <Button
+            android:id="@+id/button_upload1"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:layout_marginTop="20dp"
+            android:background="@color/mainColor"
+            android:text="수정" />
+
     </LinearLayout>
 
-    <Button
-        android:id="@+id/button_upload1"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_alignParentBottom="true"
-        android:layout_centerHorizontal="true"
-        android:background="@color/mainColor"
-        android:text="수정" />
+
 </RelativeLayout>

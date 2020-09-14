@@ -11,16 +11,13 @@ import android.net.Uri;
 import android.os.Build;
 import androidx.annotation.NonNull;
 import androidx.core.app.NotificationCompat;
-import com.example.ictproject.activity.AcceptActivity;
 import com.example.ictproject.upload.CompanyUpload;;
-import com.example.ictproject.upload.Upload;
 import com.google.firebase.messaging.RemoteMessage;
 import com.google.gson.Gson;
 
 public class MyFirebaseMessagingService extends com.google.firebase.messaging.FirebaseMessagingService {
     private static final String TAG = "MyFirebaseMsgService";
     final static String companyInformation = "companyInformation";
-    final static String uploadInformation = "uploadInformation";
     private String channelId;
 
 
@@ -35,9 +32,6 @@ public class MyFirebaseMessagingService extends com.google.firebase.messaging.Fi
         if (type.equals("companyUpload")){
             CompanyUpload companyUpload = gson.fromJson(dataJson, CompanyUpload.class);
             sendNotification(titleData, messageData, click_action,  companyUpload);
-        } else if (type.equals("upload")){
-            Upload upload = gson.fromJson(dataJson, Upload.class);
-            sendNotification(titleData, messageData, click_action,  upload);
         }
     }
 
@@ -51,13 +45,7 @@ public class MyFirebaseMessagingService extends com.google.firebase.messaging.Fi
         if (object instanceof CompanyUpload){
             Intent intent = new Intent(click_action);
             CompanyUpload companyUpload = (CompanyUpload) object;
-            intent.putExtra(companyInformation, companyUpload.getuId());
-            intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
-            pendingIntent = PendingIntent.getActivity(this, 0, intent, PendingIntent.FLAG_ONE_SHOT);
-        } else if(object instanceof Upload){
-            Intent intent = new Intent(this, AcceptActivity.class);
-            Upload upload = (Upload) object;
-            intent.putExtra(uploadInformation, upload.getUid()); // 연락을 한 사람(개인)의 UID 를 넘겨주는 부분
+            intent.putExtra(companyInformation, companyUpload.getUid());
             intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
             pendingIntent = PendingIntent.getActivity(this, 0, intent, PendingIntent.FLAG_ONE_SHOT);
         }

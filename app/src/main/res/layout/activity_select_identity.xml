@@ -8,18 +8,16 @@
     <TextView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:fontFamily="@font/jalnan"
         android:text="어떤 분이신가요?"
         android:textColor="@color/black"
-        android:textSize="30dp"
+        android:textSize="30sp"
         android:textStyle="bold" />
 
     <LinearLayout
         android:layout_width="match_parent"
-        android:layout_height="20dp" />
-
-    <LinearLayout
-        android:layout_width="match_parent"
         android:layout_height="wrap_content"
+        android:layout_marginTop="20dp"
         android:gravity="center"
         android:orientation="vertical"
         android:padding="12dp">
@@ -30,6 +28,7 @@
             android:layout_height="50dp"
             android:layout_marginBottom="12dp"
             android:background="#32CDDC39"
+            android:fontFamily="@font/bmjua_ttf"
             android:text="개인회원" />
 
         <Button
@@ -37,6 +36,7 @@
             android:layout_width="100dp"
             android:layout_height="50dp"
             android:background="#88CDDC39"
+            android:fontFamily="@font/bmjua_ttf"
             android:text="사업자회원" />
 
     </LinearLayout>

@@ -8,28 +8,30 @@
         android:id="@+id/profile"
         android:layout_width="70dp"
         android:layout_height="70dp"
-        android:src="@drawable/ic_person"
-        android:layout_gravity="center"/>
+        android:layout_gravity="center"
+        android:src="@drawable/ic_person" />
 
     <LinearLayout
-        android:layout_marginLeft="10dp"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
+        android:layout_marginStart="10dp"
         android:gravity="center_vertical"
         android:orientation="vertical">
 
         <TextView
+            android:id="@+id/chatItem_tvTitle"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="방 이름"
-            android:id="@+id/chatItem_tvTitle"/>
+            android:fontFamily="@font/jalnan"
+            android:text="방 이름" />
 
         <TextView
-            android:layout_marginTop="10dp"
+            android:id="@+id/chatItem_tvLastMessage"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="마지막 메시지"
-            android:id="@+id/chatItem_tvLastMessage"/>
+            android:layout_marginTop="10dp"
+            android:fontFamily="@font/bmjua_ttf"
+            android:text="마지막 메시지" />
 
     </LinearLayout>
 

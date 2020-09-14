@@ -9,4 +9,20 @@
         app:fontWeight="400"
         android:font="@font/bmeuljirottf"
         app:font="@font/bmeuljirottf" />
+
+    <font
+        android:fontStyle="normal"
+        app:fontStyle="normal"
+        android:fontWeight="400"
+        app:fontWeight="400"
+        android:font="@font/bmjua_ttf"
+        app:font="@font/bmjua_ttf" />
+
+    <font
+        android:fontStyle="normal"
+        app:fontStyle="normal"
+        android:fontWeight="400"
+        app:fontWeight="400"
+        android:font="@font/jalnan"
+        app:font="@font/jalnan" />
 </font-family>

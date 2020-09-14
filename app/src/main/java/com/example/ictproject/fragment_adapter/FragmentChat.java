@@ -8,11 +8,13 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.TextView;
+
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
+
 import com.bumptech.glide.Glide;
 import com.example.ictproject.ChatModel;
 import com.example.ictproject.R;
@@ -24,6 +26,7 @@ import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
+
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
@@ -103,20 +106,16 @@ public class FragmentChat extends Fragment {
                 public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
                     if (dataSnapshot.child("company").hasChild(finalDestinationUid)) {
                         CompanyUpload cUploads = dataSnapshot.child("company").child(finalDestinationUid).getValue(CompanyUpload.class);
-                        customViewHolder.profile.setImageResource(R.drawable.ic_person);
-                        customViewHolder.tvTitle.setText(cUploads.getCName());
+                        customViewHolder.profile.setImageResource(R.drawable.ic_burgerking);
+                        customViewHolder.tvTitle.setText(cUploads.getCompanyName());
+
                     } else if (dataSnapshot.child("employee").hasChild(finalDestinationUid)) {
                         Upload mUploads = dataSnapshot.child("employee").child(finalDestinationUid).getValue(Upload.class);
-                        if (mUploads.getName() == null) {
-                            customViewHolder.profile.setImageResource(R.drawable.ic_person);
-                            customViewHolder.tvTitle.setText(mUploads.getCompanyName());
-                        } else {
-                            Glide.with(getActivity())
-                                    .load(mUploads.getImageUrl())
-                                    .fitCenter()
-                                    .into(customViewHolder.profile);
-                            customViewHolder.tvTitle.setText(mUploads.getName());
-                        }
+                        Glide.with(getActivity())
+                                .load(mUploads.getImageUrl())
+                                .fitCenter()
+                                .into(customViewHolder.profile);
+                        customViewHolder.tvTitle.setText(mUploads.getName());
                     } else {
 
                     }

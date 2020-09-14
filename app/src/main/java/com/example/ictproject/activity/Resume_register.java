@@ -52,11 +52,8 @@ public class Resume_register extends AppCompatActivity {
     private TextView mExperience;
     private RelativeLayout relativeLayout1, relativeLayout2, relativeLayout;
     private LinearLayout experience;
-
     private String sex;
-
     private Uri mImageUri;
-
     private StorageReference mStorageRef;
     private DatabaseReference mDatabaseRef;
     private StorageTask mUploadTask;
@@ -257,7 +254,7 @@ public class Resume_register extends AppCompatActivity {
         createExperienceView(button8, view8, experienceList);
         createExperienceView(button9, view9, experienceList);
         createExperienceView(button10, view10, experienceList);
-        createExperienceView(button10, view11, experienceList);
+        createExperienceView(button11, view11, experienceList);
 
     }
 
@@ -288,7 +285,7 @@ public class Resume_register extends AppCompatActivity {
 
     private void uploadFile(final ArrayList<String> experienceList) {
         user = FirebaseAuth.getInstance().getCurrentUser();
-        String uid = user.getUid();
+        final String uid = user.getUid();
         if (mImageUri != null) {
             StorageReference fileReference = mStorageRef.child(uid).child(System.currentTimeMillis()
                     + "." + getFileExtension(mImageUri));
@@ -301,8 +298,9 @@ public class Resume_register extends AppCompatActivity {
                             while (!urlTask.isSuccessful()) ;
                             Uri downloadUrl = urlTask.getResult();
                             Upload upload = new Upload(mEditTextFileName.getText().toString().trim(), downloadUrl.toString(), mEditTextAge.getText().toString().trim(), sex,
-                                    experienceList.toString().replace("[", "").replace("]", "").trim(), mExperienceDetail.getText().toString().trim(), mRegion.getText().toString().trim(), mDay.getText().toString().trim(), user.getUid(), "", "");
-                            mDatabaseRef.child("employee").child(user.getUid()).setValue(upload);
+                                    experienceList.toString().replace("[", "").replace("]", "").trim(), mExperienceDetail.getText().toString().trim(), mRegion.getText().toString().trim(), mDay.getText().toString().trim(), uid);
+                            mDatabaseRef.child("employee").child(uid).removeValue();
+                            mDatabaseRef.child("employee").child(uid).setValue(upload);
                             finish();
                         }
                     })

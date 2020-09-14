@@ -85,7 +85,8 @@ public class ImagesAdapter extends RecyclerView.Adapter<ImagesAdapter.ImageViewH
         }
     }
 
-    void filter(ArrayList<String> experienceList, ArrayList<String> regionList, ArrayList<Integer> ageList, ArrayList<String> sexList) {
+    void filter(ArrayList<String> experienceList, ArrayList<String> regionList,
+                ArrayList<Integer> ageList, ArrayList<String> sexList) {
 
         String region = regionList.toString().replace("[", "").replace("]", "").trim();
         String age = ageList.toString().replace("[", "").replace("]", "").trim();
