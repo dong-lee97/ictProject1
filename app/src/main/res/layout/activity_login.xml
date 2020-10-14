@@ -37,7 +37,7 @@
                 android:fontFamily="@font/jalnan"
                 android:text="Share"
                 android:textColor="@color/black"
-                android:textSize="40sp"
+                android:textSize="32sp"
                 android:textStyle="bold" />
 
             <TextView
@@ -49,7 +49,7 @@
                 android:fontFamily="@font/jalnan"
                 android:text="Ability"
                 android:textColor="@color/black"
-                android:textSize="40sp"
+                android:textSize="32sp"
                 android:textStyle="bold" />
 
 
@@ -131,10 +131,9 @@
             android:layout_height="50dp"
             android:layout_marginBottom="8dp"
             android:background="@drawable/round"
-            android:drawableLeft="@drawable/ic_iconfinder_kakao_talk2_289120"
-            android:drawablePadding="5dp"
+            android:drawableLeft="@drawable/ic_google"
             android:fontFamily="@font/bmjua_ttf"
-            android:text="카카오 로그인" />
+            android:text="구글 로그인" />
 
         <Button
             android:id="@+id/emailLogin"

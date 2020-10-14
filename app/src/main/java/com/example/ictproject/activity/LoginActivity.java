@@ -37,9 +37,6 @@ public class LoginActivity extends AppCompatActivity {
     private boolean saveLoginData;
     private FirebaseUser currentUser;
     private String id, pwd;
-    private SessionCallback sessionCallback = new SessionCallback();
-
-    Session session;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -52,8 +49,6 @@ public class LoginActivity extends AppCompatActivity {
         Button loginButton = findViewById(R.id.loginButton);
         TextView register = findViewById(R.id.register);
         Button kakaoLogin = findViewById(R.id.kakaoLogin);
-        session = Session.getCurrentSession();
-        session.addCallback(sessionCallback);
         currentUser = mAuth.getCurrentUser();
         checkBox = findViewById(R.id.save_Id);
 
@@ -81,12 +76,6 @@ public class LoginActivity extends AppCompatActivity {
             }
         });
 
-        kakaoLogin.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                session.open(AuthType.KAKAO_LOGIN_ALL, LoginActivity.this);
-            }
-        });
     }
 
     @Override
@@ -125,44 +114,6 @@ public class LoginActivity extends AppCompatActivity {
         System.exit(1);
     }
 
-    //카카오 로그인
-    @Override
-    protected void onActivityResult(int requestCode, int resultCode, Intent data) {
-        if (Session.getCurrentSession().handleActivityResult(requestCode, resultCode, data)) {
-            Intent intent = new Intent(this, MainActivity.class);
-            startActivity(intent);
-            finish();
-            return;
-        }
-        super.onActivityResult(requestCode, resultCode, data);
-    }
-
-    @Override
-    protected void onDestroy() {
-        super.onDestroy();
-        Session.getCurrentSession().removeCallback(sessionCallback);
-    }
-
-    private class SessionCallback implements ISessionCallback {
-
-        @Override
-        public void onSessionOpened() {
-            redirectSignupActivity();
-        }
-
-        @Override
-        public void onSessionOpenFailed(KakaoException exception) {
-            if(exception != null) {
-                Logger.e(exception);
-            }
-        }
-    }
-
-    protected void redirectSignupActivity() {
-        final Intent intent = new Intent(this, MainActivity.class);
-        startActivity(intent);
-        finish();
-    }
 
     // 이메일 로그인
     private void login() {

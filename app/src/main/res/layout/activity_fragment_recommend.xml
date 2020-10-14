@@ -24,7 +24,7 @@
                 android:fontFamily="@font/bmjua_ttf"
                 android:text="추천받고 싶은 알바생의 업종을"
                 android:textColor="#000000"
-                android:textSize="25sp" />
+                android:textSize="20sp" />
 
             <TextView
                 android:layout_width="wrap_content"
@@ -33,7 +33,7 @@
                 android:fontFamily="@font/bmjua_ttf"
                 android:text="선택해주세요"
                 android:textColor="#000000"
-                android:textSize="25sp" />
+                android:textSize="20sp" />
 
             <TextView
                 android:id="@+id/recommendExperience"
