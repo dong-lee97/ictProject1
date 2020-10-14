@@ -56,7 +56,7 @@ public class FragmentChat extends Fragment {
         private ArrayList<String> destinationUsers = new ArrayList<>();
         private Context mContext;
 
-        public ChatRecyclerViewAdapter(Context context) {
+        ChatRecyclerViewAdapter(Context context) {
             mContext = context;
             uid = FirebaseAuth.getInstance().getCurrentUser().getUid();
 
@@ -153,11 +153,11 @@ public class FragmentChat extends Fragment {
 
         private class CustomViewHolder extends RecyclerView.ViewHolder {
 
-            public ImageView profile;
-            public TextView tvTitle;
-            public TextView tvLastMessage;
+            ImageView profile;
+            TextView tvTitle;
+            TextView tvLastMessage;
 
-            public CustomViewHolder(View view) {
+            CustomViewHolder(View view) {
                 super(view);
                 profile = view.findViewById(R.id.profile);
                 tvTitle = view.findViewById(R.id.chatItem_tvTitle);

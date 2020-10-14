@@ -15,6 +15,11 @@ import com.bumptech.glide.Glide;
 import com.example.ictproject.R;
 import com.example.ictproject.activity.Resume_main;
 import com.example.ictproject.upload.Upload;
+import com.google.firebase.database.DataSnapshot;
+import com.google.firebase.database.DatabaseError;
+import com.google.firebase.database.DatabaseReference;
+import com.google.firebase.database.FirebaseDatabase;
+import com.google.firebase.database.ValueEventListener;
 
 import java.util.ArrayList;
 
@@ -23,7 +28,7 @@ public class ImagesAdapter extends RecyclerView.Adapter<ImagesAdapter.ImageViewH
     private ArrayList<Upload> unfilteredUploads;
     private ArrayList<Upload> filteredUploads;
 
-    public ImagesAdapter(Context context, ArrayList<Upload> uploads) {
+    ImagesAdapter(Context context, ArrayList<Upload> uploads) {
         mContext = context;
         unfilteredUploads = uploads;
         filteredUploads = uploads;
@@ -37,7 +42,7 @@ public class ImagesAdapter extends RecyclerView.Adapter<ImagesAdapter.ImageViewH
     }
 
     @Override
-    public void onBindViewHolder(ImageViewHolder holder, int position) {
+    public void onBindViewHolder(final ImageViewHolder holder, int position) {
         final Upload uploadCurrent = filteredUploads.get(position);
         holder.textViewName.setText(uploadCurrent.getName());
         holder.textViewExperience.setText(uploadCurrent.getExperience());
@@ -47,7 +52,23 @@ public class ImagesAdapter extends RecyclerView.Adapter<ImagesAdapter.ImageViewH
                 .load(uploadCurrent.getImageUrl())
                 .override(110, 110)
                 .centerCrop()
-                .into(holder.imageView);
+                .into(holder.profile);
+        DatabaseReference databaseReference = FirebaseDatabase.getInstance().getReference("user");
+        databaseReference.addListenerForSingleValueEvent(new ValueEventListener() {
+            @Override
+            public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
+                if (dataSnapshot.child("match").hasChild(uploadCurrent.getUid())){
+                    holder.badge.setVisibility(View.VISIBLE);
+                } else {
+                    holder.badge.setVisibility(View.GONE);
+                }
+            }
+
+            @Override
+            public void onCancelled(@NonNull DatabaseError databaseError) {
+
+            }
+        });
         holder.itemView.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -71,13 +92,14 @@ public class ImagesAdapter extends RecyclerView.Adapter<ImagesAdapter.ImageViewH
         return filteredUploads.size();
     }
 
-    public class ImageViewHolder extends RecyclerView.ViewHolder {
-        public TextView textViewName, textViewExperience, textViewRegion, textViewDay;
-        public ImageView imageView;
+    static class ImageViewHolder extends RecyclerView.ViewHolder {
+        TextView textViewName, textViewExperience, textViewRegion, textViewDay;
+        ImageView profile, badge;
 
-        public ImageViewHolder(View itemView) {
+        ImageViewHolder(View itemView) {
             super(itemView);
-            imageView = itemView.findViewById(R.id.image_view_upload);
+            profile = itemView.findViewById(R.id.image_view_upload);
+            badge = itemView.findViewById(R.id.badge);
             textViewName = itemView.findViewById(R.id.text_view_name);
             textViewExperience = itemView.findViewById(R.id.text_view_experience);
             textViewRegion = itemView.findViewById(R.id.text_view_region);

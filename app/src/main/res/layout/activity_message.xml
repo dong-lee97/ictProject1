@@ -31,10 +31,25 @@
             android:textStyle="bold" />
 
         <Button
+            android:id="@+id/feedbackButton"
+            android:layout_width="40dp"
+            android:layout_height="30dp"
+            android:layout_toStartOf="@+id/matchButton"
+            android:textSize="10dp"
+            android:layout_gravity="center_vertical"
+            android:layout_centerInParent="true"
+            android:background="@drawable/button_round1"
+            android:fontFamily="@font/bmjua_ttf"
+            android:text="후기 작성"
+            android:layout_marginRight="5dp"/>
+
+        <Button
             android:id="@+id/matchButton"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
+            android:layout_width="40dp"
+            android:layout_height="30dp"
             android:layout_alignParentEnd="true"
+            android:textSize="10dp"
+            android:layout_centerInParent="true"
             android:layout_gravity="center_vertical"
             android:background="@drawable/button_round1"
             android:fontFamily="@font/bmjua_ttf"
@@ -53,6 +68,7 @@
 
     </androidx.recyclerview.widget.RecyclerView>
 
+
     <EditText
         android:id="@+id/messageActivity_et"
         android:layout_width="wrap_content"
@@ -70,5 +86,45 @@
         android:background="@color/mainColor"
         android:fontFamily="@font/bmjua_ttf"
         android:text="전송" />
+
+    <RelativeLayout
+        android:id="@+id/writeFeedbackLayout"
+        android:background="@drawable/button_round1"
+        android:layout_width="300dp"
+        android:layout_height="300dp"
+        android:layout_centerInParent="true"
+        android:padding="20dp"
+        android:visibility="gone">
+
+        <TextView
+            android:id="@+id/feedbackTitle"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:fontFamily="@font/bmjua_ttf"
+            android:text="후기 작성"
+            android:textColor="@color/black"
+            android:textSize="20dp" />
+
+        <EditText
+            android:id="@+id/feedbackEditText"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_below="@id/feedbackTitle"
+            android:layout_marginTop="10dp"
+            android:textColor="@color/black"
+            android:textSize="15dp" />
+
+        <Button
+            android:id="@+id/uploadFeedback"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="등록"
+            android:textSize="15dp"
+            android:background="@drawable/round1"
+            android:fontFamily="@font/bmjua_ttf"
+            android:textColor="@color/black"
+            android:layout_alignParentBottom="true"
+            android:layout_centerInParent="true"/>
+    </RelativeLayout>
 
 </RelativeLayout>

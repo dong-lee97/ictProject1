@@ -269,10 +269,12 @@
         </LinearLayout>
 
         <LinearLayout
+            android:id="@+id/feedbackLayout"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginTop="10dp"
-            android:orientation="vertical">
+            android:orientation="vertical"
+            android:visibility="gone">
 
             <LinearLayout
                 android:layout_width="match_parent"
@@ -294,17 +296,47 @@
                     android:textColor="#000000" />
             </LinearLayout>
 
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="vertical"
+                android:background="@drawable/button_round1"
+                android:padding="8dp">
+
+                <TextView
+                    android:id="@+id/fCompanyName"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:textColor="@color/black"
+                    android:fontFamily="@font/bmjua_ttf"/>
+
+                <TextView
+                    android:id="@+id/companyFeedback"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:fontFamily="@font/bmjua_ttf"/>
+
+            </LinearLayout>
+
+
+
         </LinearLayout>
 
-        <Button
-            android:id="@+id/call1_button"
-            android:layout_width="wrap_content"
+        <LinearLayout
+            android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_gravity="center"
-            android:layout_marginTop="20dp"
-            android:background="@drawable/round"
-            android:text="연락하기" />
+            android:gravity="center"
+            android:orientation="vertical">
 
+            <Button
+                android:id="@+id/call1_button"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center"
+                android:layout_marginTop="20dp"
+                android:background="@drawable/round"
+                android:text="연락하기" />
+        </LinearLayout>
 
     </LinearLayout>
 

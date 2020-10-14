@@ -5,14 +5,25 @@ import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
 import android.widget.ImageView;
+import android.widget.LinearLayout;
 import android.widget.TextView;
+
+import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 import com.bumptech.glide.Glide;
 import com.example.ictproject.R;
-
+import com.example.ictproject.upload.Feedback;
+import com.google.firebase.database.DataSnapshot;
+import com.google.firebase.database.DatabaseError;
+import com.google.firebase.database.DatabaseReference;
+import com.google.firebase.database.FirebaseDatabase;
+import com.google.firebase.database.ValueEventListener;
 
 
 public class Resume_main extends AppCompatActivity {
+
+    private Feedback feedback;
+    private LinearLayout linearLayout;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -28,6 +39,8 @@ public class Resume_main extends AppCompatActivity {
         TextView mRegion = findViewById(R.id.mPossible_region);
         TextView mDay = findViewById(R.id.mPossible_day);
         ImageView mImageView = findViewById(R.id.mImage_view);
+        final TextView companyName = findViewById(R.id.fCompanyName);
+        final TextView feedbackText = findViewById(R.id.companyFeedback);
 
         Intent intent = getIntent();
         String name = intent.getExtras().getString("name");
@@ -40,6 +53,9 @@ public class Resume_main extends AppCompatActivity {
         String sex = intent.getExtras().getString("sex");
         String age_sex = age + "(" + sex + ")";
         final String uid = intent.getExtras().getString("ResumeUid");
+
+        DatabaseReference databaseReference = FirebaseDatabase.getInstance().getReference("feedback");
+        linearLayout = findViewById(R.id.feedbackLayout);
 
         mEditTextFileName.setText(name);
         mEditTextAge.setText(age_sex);
@@ -69,6 +85,23 @@ public class Resume_main extends AppCompatActivity {
                 intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TASK);
                 intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
                 startActivity(intent);
+            }
+        });
+
+        databaseReference.addListenerForSingleValueEvent(new ValueEventListener() {
+            @Override
+            public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
+                if (dataSnapshot.hasChild(uid)){
+                    linearLayout.setVisibility(View.VISIBLE);
+                    feedback = dataSnapshot.child(uid).getValue(Feedback.class);
+                    companyName.setText(feedback.getCompanyName());
+                    feedbackText.setText(feedback.getFeedback());
+                }
+            }
+
+            @Override
+            public void onCancelled(@NonNull DatabaseError databaseError) {
+
             }
         });
     }

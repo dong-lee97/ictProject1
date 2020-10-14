@@ -6,7 +6,9 @@ import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.os.Bundle;
+import android.provider.ContactsContract;
 import android.telephony.SmsManager;
 import android.view.Gravity;
 import android.view.LayoutInflater;
@@ -16,6 +18,7 @@ import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
+import android.widget.RelativeLayout;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -23,6 +26,7 @@ import com.bumptech.glide.Glide;
 import com.example.ictproject.ChatModel;
 import com.example.ictproject.R;
 import com.example.ictproject.upload.CompanyUpload;
+import com.example.ictproject.upload.Feedback;
 import com.example.ictproject.upload.Upload;
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.OnSuccessListener;
@@ -30,6 +34,7 @@ import com.google.android.gms.tasks.Task;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
+import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
 
@@ -38,15 +43,18 @@ import java.util.List;
 
 public class MessageActivity extends AppCompatActivity {
 
-    private String destinationUid, chatRoomUid, uid, phoneNum;
+    private DatabaseReference DatabaseRef, fDatabaseRef, chatDatabaseRef;
+    private String destinationUid, chatRoomUid, uid, phoneNum, num;
+    private RelativeLayout relativeLayout;
     private Button button, matchButton;
-    private EditText editText;
+    private EditText editText, feedbackEditText;
     private RecyclerView recyclerView;
     private TextView textView;
     private CompanyUpload cUploads;
+    private SharedPreferences appData;
 
     @Override
-    protected void onCreate(Bundle savedInstanceState) {
+    protected void onCreate(final Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_message);
 
@@ -55,9 +63,38 @@ public class MessageActivity extends AppCompatActivity {
         button = findViewById(R.id.messageActivity_btn);
         matchButton = findViewById(R.id.matchButton);
         editText = findViewById(R.id.messageActivity_et);
+        feedbackEditText = findViewById(R.id.feedbackEditText);
         recyclerView = findViewById(R.id.messageActivity_rv);
-        ImageView imageView = findViewById(R.id.backward);
         textView = findViewById(R.id.chatRoomName);
+        relativeLayout = findViewById(R.id.writeFeedbackLayout);
+        DatabaseRef = FirebaseDatabase.getInstance().getReference("user");
+        fDatabaseRef = FirebaseDatabase.getInstance().getReference("feedback");
+        chatDatabaseRef = FirebaseDatabase.getInstance().getReference("chatRooms");
+
+        ImageView imageView = findViewById(R.id.backward);
+        Button uploadFd = findViewById(R.id.uploadFeedback);
+        Button feedback = findViewById(R.id.feedbackButton);
+
+        appData = getSharedPreferences("appData", MODE_PRIVATE);
+        load();
+
+        DatabaseRef.addListenerForSingleValueEvent(new ValueEventListener() {
+            @Override
+            public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
+                if (dataSnapshot.child("employee").hasChild(destinationUid)) {
+                    Upload upload = dataSnapshot.child("employee").child(destinationUid).getValue(Upload.class);
+                    textView.setText(upload.getName());
+                } else {
+                    CompanyUpload companyUpload = dataSnapshot.child("company").child(destinationUid).getValue(CompanyUpload.class);
+                    textView.setText(companyUpload.getCompanyName());
+                }
+            }
+
+            @Override
+            public void onCancelled(@NonNull DatabaseError databaseError) {
+
+            }
+        });
 
         imageView.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -77,17 +114,17 @@ public class MessageActivity extends AppCompatActivity {
 
                 if (chatRoomUid == null) {
                     button.setEnabled(false);
-                    FirebaseDatabase.getInstance().getReference().child("chatRooms").push().setValue(chatModel).addOnSuccessListener(new OnSuccessListener<Void>() {
+                    chatDatabaseRef.push().setValue(chatModel).addOnSuccessListener(new OnSuccessListener<Void>() {
                         @Override
                         public void onSuccess(Void aVoid) {
                             checkChatRoom();
                         }
-                    });
+                   });
                 } else {
                     ChatModel.Comment comment = new ChatModel.Comment();
                     comment.uid = uid;
                     comment.message = editText.getText().toString();
-                    FirebaseDatabase.getInstance().getReference().child("chatRooms").child(chatRoomUid).child("comments").push().setValue(comment).addOnCompleteListener(new OnCompleteListener<Void>() {
+                    chatDatabaseRef.child(chatRoomUid).child("comments").push().setValue(comment).addOnCompleteListener(new OnCompleteListener<Void>() {
                         @Override
                         public void onComplete(@NonNull Task<Void> task) {
                             editText.setText(""); // 입력창 초기화
@@ -96,12 +133,17 @@ public class MessageActivity extends AppCompatActivity {
                 }
             }
         });
+
         checkChatRoom();
 
         matchButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                FirebaseDatabase.getInstance().getReference("user").addListenerForSingleValueEvent(new ValueEventListener() {
+                if (num == "1") {
+                    matchButton.setEnabled(false);
+                }
+
+                DatabaseRef.addListenerForSingleValueEvent(new ValueEventListener() {
                     @Override
                     public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
                         if (dataSnapshot.child("company").hasChild(uid)) {
@@ -110,11 +152,12 @@ public class MessageActivity extends AppCompatActivity {
                             if (dataSnapshot.child("company").hasChild(destinationUid)) {
                                 cUploads = dataSnapshot.child("company").child(destinationUid).getValue(CompanyUpload.class);
                                 phoneNum = cUploads.getCompanyPhone().trim();
+                                DatabaseRef.child("match").child(uid).setValue("matching");
                             }
 
                             try {
-                                SmsManager smgr = SmsManager.getDefault();
-                                smgr.sendTextMessage(phoneNum, null, "안녕하세요, 이번에 쉐어빌리티를 통해 근무하게 되어 연락드립니다", null, null);
+                                //SmsManager smgr = SmsManager.getDefault();
+                                //smgr.sendTextMessage(phoneNum, null, "안녕하세요, 이번에 쉐어빌리티를 통해 근무하게 되어 연락드립니다", null, null);
                                 Toast.makeText(MessageActivity.this, "메시지를 성공적으로 전송하였습니다.", Toast.LENGTH_SHORT).show();
                             } catch (Exception e) {
                                 Toast.makeText(MessageActivity.this, "메시지 전송을 실패하였습니다.", Toast.LENGTH_SHORT).show();
@@ -127,13 +170,47 @@ public class MessageActivity extends AppCompatActivity {
 
                     }
                 });
+                save();
+            }
+        });
+
+        feedback.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                relativeLayout.setVisibility(View.VISIBLE);
+            }
+        });
+
+        uploadFd.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                DatabaseRef.addListenerForSingleValueEvent(new ValueEventListener() {
+                    @Override
+                    public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
+                        if (dataSnapshot.child("company").hasChild(uid)) {
+                            cUploads = dataSnapshot.child("company").child(uid).getValue(CompanyUpload.class);
+                            String companyName = cUploads.getCompanyName().trim();
+
+                            Feedback feedback = new Feedback(companyName, feedbackEditText.getText().toString().trim());
+                            fDatabaseRef.child(destinationUid).setValue(feedback);
+                            Toast.makeText(MessageActivity.this, "등록 성공", Toast.LENGTH_LONG).show();
+                            relativeLayout.setVisibility(View.GONE);
+                        }
+                    }
+
+                    @Override
+                    public void onCancelled(@NonNull DatabaseError databaseError) {
+
+                    }
+                });
+
             }
         });
 
     }
 
     void checkChatRoom() {
-        FirebaseDatabase.getInstance().getReference().child("chatRooms").orderByChild("users/" + uid).equalTo(true).addListenerForSingleValueEvent(new ValueEventListener() {
+        chatDatabaseRef.orderByChild("users/" + uid).equalTo(true).addListenerForSingleValueEvent(new ValueEventListener() {
             @Override
             public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
                 for (DataSnapshot item : dataSnapshot.getChildren()) {
@@ -161,11 +238,11 @@ public class MessageActivity extends AppCompatActivity {
         Upload mUploads;
         CompanyUpload cUploads;
 
-        public RecyclerViewAdapter() {
+        RecyclerViewAdapter() {
             comments = new ArrayList<>();
 
             // 회사 구직자 구별 필요?
-            FirebaseDatabase.getInstance().getReference().child("user").child(destinationUid).addListenerForSingleValueEvent(new ValueEventListener() {
+            DatabaseRef.child(destinationUid).addListenerForSingleValueEvent(new ValueEventListener() {
                 @Override
                 public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
                     if (dataSnapshot.child("employee").hasChild(destinationUid)) {
@@ -185,7 +262,7 @@ public class MessageActivity extends AppCompatActivity {
         }
 
         void getMessageList() {
-            FirebaseDatabase.getInstance().getReference().child("chatRooms").child(chatRoomUid).child("comments").addValueEventListener(new ValueEventListener() {
+            chatDatabaseRef.child(chatRoomUid).child("comments").addValueEventListener(new ValueEventListener() {
                 @Override
                 public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
                     comments.clear();
@@ -195,6 +272,7 @@ public class MessageActivity extends AppCompatActivity {
                     notifyDataSetChanged();
                     recyclerView.scrollToPosition(comments.size() - 1);
                 }
+
                 @Override
                 public void onCancelled(@NonNull DatabaseError databaseError) {
 
@@ -214,13 +292,12 @@ public class MessageActivity extends AppCompatActivity {
             final MessageViewHolder messageViewHolder = ((MessageViewHolder) holder);
 
             // 업체 구직자 구별 필요?
-            FirebaseDatabase.getInstance().getReference("user").addListenerForSingleValueEvent(new ValueEventListener() {
+            DatabaseRef.addListenerForSingleValueEvent(new ValueEventListener() {
                 @Override
                 public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
                     // 대화 상대방이 구직자일 때
                     if (dataSnapshot.child("employee").hasChild(destinationUid)) {
                         mUploads = dataSnapshot.child("employee").child(destinationUid).getValue(Upload.class);
-                        textView.setText(mUploads.getName());
                         if (comments.get(position).uid.equals(uid)) {
                             messageViewHolder.chatProfile.setVisibility(View.INVISIBLE);
                             messageViewHolder.tvMessage.setText(comments.get(position).message);
@@ -243,7 +320,6 @@ public class MessageActivity extends AppCompatActivity {
                         // 대화 상대방이 업체일 때
                     } else {
                         cUploads = dataSnapshot.child("company").child(destinationUid).getValue(CompanyUpload.class);
-                        textView.setText(cUploads.getCompanyName());
                         if (comments.get(position).uid.equals(uid)) {
                             messageViewHolder.chatProfile.setVisibility(View.INVISIBLE);
                             messageViewHolder.tvMessage.setText(comments.get(position).message);
@@ -278,14 +354,14 @@ public class MessageActivity extends AppCompatActivity {
         }
 
         private class MessageViewHolder extends RecyclerView.ViewHolder {
-            public TextView tvName;
-            public TextView tvMessage;
-            public LinearLayout llDestination;
-            public LinearLayout llMain;
-            public ImageView chatProfile;
+            TextView tvName;
+            TextView tvMessage;
+            LinearLayout llDestination;
+            LinearLayout llMain;
+            ImageView chatProfile;
 
 
-            public MessageViewHolder(View view) {
+            MessageViewHolder(View view) {
                 super(view);
                 llDestination = (LinearLayout) view.findViewById(R.id.messageItem_llDestination);
                 tvMessage = view.findViewById(R.id.messageItem_tvMessage);
@@ -303,5 +379,15 @@ public class MessageActivity extends AppCompatActivity {
         moveTaskToBack(true);
         android.os.Process.killProcess(android.os.Process.myPid());
         System.exit(1);
+    }
+
+    private void save() {
+        SharedPreferences.Editor editor = appData.edit();
+        editor.putString("matchClick", "1");
+        editor.apply();
+    }
+
+    private void load() {
+        num = appData.getString("matchClick",  "");
     }
 }

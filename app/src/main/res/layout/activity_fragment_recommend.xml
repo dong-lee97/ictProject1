@@ -1,184 +1,465 @@
 <?xml version="1.0" encoding="utf-8"?>
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
     android:layout_height="match_parent">
 
-    <LinearLayout
-        android:id="@+id/recommendTextview"
+    <RelativeLayout
+        android:id="@+id/mainRecommend"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:orientation="vertical"
-        android:padding="30dp">
+        android:layout_height="match_parent"
+        android:visibility="visible">
+
+        <LinearLayout
+            android:id="@+id/recommendTextview"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            android:padding="25dp">
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="5dp"
+                android:fontFamily="@font/bmjua_ttf"
+                android:text="추천받고 싶은 알바생의 업종을"
+                android:textColor="#000000"
+                android:textSize="25sp" />
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="5dp"
+                android:fontFamily="@font/bmjua_ttf"
+                android:text="선택해주세요"
+                android:textColor="#000000"
+                android:textSize="25sp" />
+
+            <TextView
+                android:id="@+id/recommendExperience"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="5dp"
+                android:layout_marginTop="8dp"
+                android:fontFamily="@font/bmjua_ttf"
+                android:textColor="@color/mainColor" />
+        </LinearLayout>
+
+        <LinearLayout
+            android:id="@+id/layout4"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_below="@+id/recommendTextview"
+            android:layout_marginStart="20dp"
+            android:layout_marginTop="15dp"
+            android:orientation="horizontal"
+            android:padding="8dp">
+
+            <Button
+                android:id="@+id/rCafeButton"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:background="@drawable/button_round1"
+                android:fontFamily="@font/bmjua_ttf"
+                android:text="카페" />
+
+            <Button
+                android:id="@+id/rRestaurantButton"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="8dp"
+                android:background="@drawable/button_round1"
+                android:fontFamily="@font/bmjua_ttf"
+                android:text="음식점/주점" />
+
+            <Button
+                android:id="@+id/rCStoreButton"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="8dp"
+                android:background="@drawable/button_round1"
+                android:fontFamily="@font/bmjua_ttf"
+                android:text="편의점" />
+
+        </LinearLayout>
+
+        <LinearLayout
+            android:id="@+id/layout5"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_below="@+id/layout4"
+            android:layout_marginStart="20dp"
+            android:orientation="horizontal"
+            android:padding="8dp">
+
+            <Button
+                android:id="@+id/rAcademyButton"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:background="@drawable/button_round1"
+                android:fontFamily="@font/bmjua_ttf"
+                android:text="학원" />
+
+            <Button
+                android:id="@+id/rMartButton"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="8dp"
+                android:background="@drawable/button_round1"
+                android:fontFamily="@font/bmjua_ttf"
+                android:text="마트" />
+
+            <Button
+                android:id="@+id/rPcButton"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="8dp"
+                android:background="@drawable/button_round1"
+                android:fontFamily="@font/bmjua_ttf"
+                android:text="PC방" />
+
+        </LinearLayout>
+
+        <LinearLayout
+            android:id="@+id/layout6"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_below="@+id/layout5"
+            android:layout_marginStart="20dp"
+            android:orientation="horizontal"
+            android:padding="8dp">
+
+            <Button
+                android:id="@+id/rClothesButton"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:background="@drawable/button_round1"
+                android:fontFamily="@font/bmjua_ttf"
+                android:text="의류" />
+
+            <Button
+                android:id="@+id/rBeautyButton"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="8dp"
+                android:background="@drawable/button_round1"
+                android:fontFamily="@font/bmjua_ttf"
+                android:text="뷰티" />
+
+            <Button
+                android:id="@+id/rGymButton"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="8dp"
+                android:background="@drawable/button_round1"
+                android:fontFamily="@font/bmjua_ttf"
+                android:text="운동/헬스" />
+
+        </LinearLayout>
+
+        <LinearLayout
+            android:id="@+id/layout7"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_below="@+id/layout6"
+            android:layout_marginStart="20dp"
+            android:orientation="horizontal"
+            android:padding="8dp">
+
+            <Button
+                android:id="@+id/rCleanButton"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:background="@drawable/button_round1"
+                android:fontFamily="@font/bmjua_ttf"
+                android:text="청소/용역" />
+
+            <Button
+                android:id="@+id/rExtraButton"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="8dp"
+                android:background="@drawable/button_round1"
+                android:fontFamily="@font/bmjua_ttf"
+                android:text="기타" />
+
+        </LinearLayout>
 
         <TextView
-            android:layout_width="wrap_content"
+            android:id="@+id/recommendAlba"
+            android:layout_width="match_parent"
             android:layout_height="wrap_content"
+            android:layout_below="@+id/layout7"
+            android:layout_marginTop="10dp"
             android:fontFamily="@font/bmjua_ttf"
-            android:text="추천받고 싶은 알바생의 업종을"
-            android:textColor="#000000"
-            android:textSize="25sp" />
+            android:gravity="center"
+            android:padding="50dp"
+            android:text="추천!"
+            android:textColor="@color/black"
+            android:textSize="20dp"
+            android:textStyle="bold" />
 
-        <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:fontFamily="@font/bmjua_ttf"
-            android:text="선택해주세요"
-            android:textColor="#000000"
-            android:textSize="25sp" />
-    </LinearLayout>
 
-    <LinearLayout
-        android:id="@+id/layout4"
+    </RelativeLayout>
+
+    <RelativeLayout
+        android:id="@+id/dataOfRecommend"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_below="@+id/recommendTextview"
-        android:layout_marginStart="20dp"
-        android:layout_marginTop="15dp"
-        android:orientation="horizontal"
-        android:padding="8dp">
+        android:layout_height="match_parent"
+        android:background="#21000000"
+        android:padding="16dp"
+        android:visibility="gone">
 
-        <Button
-            android:id="@+id/rCafeButton"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:background="@drawable/button_round1"
-            android:fontFamily="@font/bmjua_ttf"
-            android:text="카페" />
+        <androidx.cardview.widget.CardView
+            android:id="@+id/companyCardView"
+            android:layout_width="300dp"
+            android:layout_height="300dp"
+            android:layout_centerInParent="true"
+            app:cardBackgroundColor="#ffffff">
 
-        <Button
-            android:id="@+id/rRestaurantButton"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginStart="8dp"
-            android:background="@drawable/button_round1"
-            android:fontFamily="@font/bmjua_ttf"
-            android:text="음식점/주점" />
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center"
+                android:orientation="vertical">
 
-        <Button
-            android:id="@+id/rCStoreButton"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginStart="8dp"
-            android:background="@drawable/button_round1"
-            android:fontFamily="@font/bmjua_ttf"
-            android:text="편의점" />
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="12dp"
+                    android:orientation="horizontal">
 
-    </LinearLayout>
+                    <TextView
+                        android:id="@+id/whichExperience"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginStart="5dp"
+                        android:fontFamily="@font/bmjua_ttf"
+                        android:textColor="#000000"
+                        android:textSize="20sp" />
 
-    <LinearLayout
-        android:id="@+id/layout5"
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:fontFamily="@font/bmjua_ttf"
+                        android:text=" 알바생 추천"
+                        android:textColor="#000000"
+                        android:textSize="20sp" />
+                </LinearLayout>
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="12dp"
+                    android:layout_marginTop="20dp"
+                    android:orientation="horizontal">
+
+                    <LinearLayout
+                        android:layout_width="5dp"
+                        android:layout_height="20dp"
+                        android:layout_gravity="center"
+                        android:background="@color/mainColor"
+                        android:orientation="vertical" />
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginStart="5dp"
+                        android:fontFamily="@font/bmjua_ttf"
+                        android:text="성별 : "
+                        android:textColor="#000000" />
+
+                    <TextView
+                        android:id="@+id/algorithmSex"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:fontFamily="@font/bmjua_ttf"
+                        android:textColor="#000000" />
+                </LinearLayout>
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="12dp"
+                    android:layout_marginTop="10dp"
+                    android:orientation="horizontal">
+
+                    <LinearLayout
+                        android:layout_width="5dp"
+                        android:layout_height="20dp"
+                        android:layout_gravity="center"
+                        android:background="@color/mainColor"
+                        android:orientation="vertical" />
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginStart="5dp"
+                        android:fontFamily="@font/bmjua_ttf"
+                        android:text="나이 : "
+                        android:textColor="#000000" />
+
+                    <TextView
+                        android:id="@+id/algorithmAge"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:fontFamily="@font/bmjua_ttf"
+                        android:textColor="#000000" />
+                </LinearLayout>
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="12dp"
+                    android:layout_marginTop="10dp"
+                    android:orientation="horizontal">
+
+                    <LinearLayout
+                        android:layout_width="5dp"
+                        android:layout_height="20dp"
+                        android:layout_gravity="center"
+                        android:background="@color/mainColor"
+                        android:orientation="vertical" />
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginStart="5dp"
+                        android:fontFamily="@font/bmjua_ttf"
+                        android:text="경력 : "
+                        android:textColor="#000000" />
+
+                    <TextView
+                        android:id="@+id/algorithmExperience"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:fontFamily="@font/bmjua_ttf"
+                        android:textColor="#000000" />
+                </LinearLayout>
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="12dp"
+                    android:layout_marginTop="10dp"
+                    android:orientation="horizontal">
+
+                    <LinearLayout
+                        android:id="@+id/first"
+                        android:layout_width="5dp"
+                        android:layout_height="20dp"
+                        android:layout_gravity="center"
+                        android:background="@color/mainColor"
+                        android:orientation="vertical" />
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginStart="5dp"
+                        android:fontFamily="@font/bmjua_ttf"
+                        android:text="지역 : "
+                        android:textColor="#000000" />
+
+                    <TextView
+                        android:id="@+id/algorithmRegion"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:fontFamily="@font/bmjua_ttf"
+                        android:textColor="#000000" />
+                </LinearLayout>
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="40dp"
+                    android:gravity="center_horizontal"
+                    android:orientation="horizontal">
+
+                    <Button
+                        android:id="@+id/recommendYes"
+                        android:layout_width="60dp"
+                        android:layout_height="30dp"
+                        android:background="@drawable/button_round1"
+                        android:fontFamily="@font/bmjua_ttf"
+                        android:text="확인"
+                        android:textColor="#000000" />
+
+                    <Button
+                        android:id="@+id/recommendNo"
+                        android:layout_width="60dp"
+                        android:layout_height="30dp"
+                        android:layout_marginStart="10dp"
+                        android:background="@drawable/button_round1"
+                        android:fontFamily="@font/bmjua_ttf"
+                        android:text="취소"
+                        android:textColor="#000000" />
+
+                </LinearLayout>
+
+
+            </LinearLayout>
+
+        </androidx.cardview.widget.CardView>
+
+    </RelativeLayout>
+
+    <RelativeLayout
+        android:id="@+id/resultRecommend"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_below="@+id/layout4"
-        android:layout_marginStart="20dp"
-        android:orientation="horizontal"
-        android:padding="8dp">
+        android:layout_height="match_parent"
+        android:visibility="gone">
 
-        <Button
-            android:id="@+id/rAcademyButton"
-            android:layout_width="wrap_content"
+        <LinearLayout
+            android:id="@+id/todayRecommend"
+            android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:background="@drawable/button_round1"
-            android:fontFamily="@font/bmjua_ttf"
-            android:text="학원" />
+            android:orientation="vertical"
+            android:padding="25dp">
 
-        <Button
-            android:id="@+id/rMartButton"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginStart="8dp"
-            android:background="@drawable/button_round1"
-            android:fontFamily="@font/bmjua_ttf"
-            android:text="마트" />
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="5dp"
+                android:fontFamily="@font/bmjua_ttf"
+                android:text="오늘의 추천 알바생"
+                android:textColor="#000000"
+                android:textSize="25sp" />
 
-        <Button
-            android:id="@+id/rPcButton"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginStart="8dp"
-            android:background="@drawable/button_round1"
-            android:fontFamily="@font/bmjua_ttf"
-            android:text="PC방" />
+        </LinearLayout>
 
-    </LinearLayout>
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:gravity="center">
 
-    <LinearLayout
-        android:id="@+id/layout6"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_below="@+id/layout5"
-        android:layout_marginStart="20dp"
-        android:orientation="horizontal"
-        android:padding="8dp">
+            <androidx.cardview.widget.CardView
+                android:id="@+id/recommendCard"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_centerInParent="true"
+                android:orientation="vertical">
 
-        <Button
-            android:id="@+id/rClothesButton"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:background="@drawable/button_round1"
-            android:fontFamily="@font/bmjua_ttf"
-            android:text="의류" />
+                <androidx.recyclerview.widget.RecyclerView
+                    android:background="@color/mainColor1"
+                    android:id="@+id/recommendRecycler"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"/>
+            </androidx.cardview.widget.CardView>
 
-        <Button
-            android:id="@+id/rBeautyButton"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginStart="8dp"
-            android:background="@drawable/button_round1"
-            android:fontFamily="@font/bmjua_ttf"
-            android:text="뷰티" />
+            <TextView
+                android:id="@+id/recommendAnother"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_below="@id/recommendCard"
+                android:layout_centerInParent="true"
+                android:text="다른 사람 추천받기>>"
+                android:fontFamily="@font/bmjua_ttf"
+                android:layout_marginTop="15dp"/>
 
-        <Button
-            android:id="@+id/rGymButton"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginStart="8dp"
-            android:background="@drawable/button_round1"
-            android:fontFamily="@font/bmjua_ttf"
-            android:text="운동/헬스" />
 
-    </LinearLayout>
+        </RelativeLayout>
 
-    <LinearLayout
-        android:id="@+id/layout7"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_below="@+id/layout6"
-        android:layout_marginStart="20dp"
-        android:orientation="horizontal"
-        android:padding="8dp">
 
-        <Button
-            android:id="@+id/rCleanButton"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:background="@drawable/button_round1"
-            android:fontFamily="@font/bmjua_ttf"
-            android:text="청소/용역" />
-
-        <Button
-            android:id="@+id/rExtraButton"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginStart="8dp"
-            android:background="@drawable/button_round1"
-            android:fontFamily="@font/bmjua_ttf"
-            android:text="기타" />
-
-    </LinearLayout>
-
-    <TextView
-        android:layout_marginTop="10dp"
-        android:id="@+id/recommendAlba"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_below="@+id/layout7"
-        android:text="추천받기!"
-        android:textSize="20dp"
-        android:gravity="center"
-        android:textColor="@color/black"
-        android:fontFamily="@font/bmjua_ttf"
-        android:textStyle="bold"
-        android:padding="50dp"/>
+    </RelativeLayout>
 
 </RelativeLayout>

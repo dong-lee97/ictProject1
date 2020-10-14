@@ -608,7 +608,7 @@
                     android:id="@+id/cafeButton"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:background="@drawable/round"
+                    android:background="@drawable/button_round1"
                     android:text="카페" />
 
                 <Button
@@ -616,7 +616,7 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_marginStart="5dp"
-                    android:background="@drawable/round"
+                    android:background="@drawable/button_round1"
                     android:text="음식점/주점" />
 
                 <Button
@@ -624,7 +624,7 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_marginStart="5dp"
-                    android:background="@drawable/round"
+                    android:background="@drawable/button_round1"
                     android:text="편의점" />
 
             </LinearLayout>
@@ -641,7 +641,7 @@
                     android:id="@+id/academyButton"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:background="@drawable/round"
+                    android:background="@drawable/button_round1"
                     android:text="학원" />
 
                 <Button
@@ -649,7 +649,7 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_marginStart="5dp"
-                    android:background="@drawable/round"
+                    android:background="@drawable/button_round1"
                     android:text="마트" />
 
                 <Button
@@ -657,7 +657,7 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_marginStart="5dp"
-                    android:background="@drawable/round"
+                    android:background="@drawable/button_round1"
                     android:text="PC방" />
 
             </LinearLayout>
@@ -674,7 +674,7 @@
                     android:id="@+id/clothesButton"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:background="@drawable/round"
+                    android:background="@drawable/button_round1"
                     android:text="의류" />
 
                 <Button
@@ -682,7 +682,7 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_marginStart="5dp"
-                    android:background="@drawable/round"
+                    android:background="@drawable/button_round1"
                     android:text="뷰티" />
 
                 <Button
@@ -690,7 +690,7 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_marginStart="5dp"
-                    android:background="@drawable/round"
+                    android:background="@drawable/button_round1"
                     android:text="운동/헬스" />
 
             </LinearLayout>
@@ -707,7 +707,7 @@
                     android:id="@+id/cleanButton"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:background="@drawable/round"
+                    android:background="@drawable/button_round1"
                     android:text="청소/용역" />
 
                 <Button
@@ -715,7 +715,7 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_marginStart="5dp"
-                    android:background="@drawable/round"
+                    android:background="@drawable/button_round1"
                     android:text="기타" />
 
             </LinearLayout>

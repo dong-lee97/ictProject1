@@ -11,6 +11,8 @@ import android.widget.TextView;
 
 import com.example.ictproject.R;
 import com.example.ictproject.upload.CompanyUpload;
+import com.google.android.gms.tasks.OnCompleteListener;
+import com.google.android.gms.tasks.Task;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.database.DataSnapshot;
@@ -23,6 +25,7 @@ public class AcceptActivity extends AppCompatActivity {
     private TextView aCompany, aPhone;
     private CompanyUpload cUpload;
     private String companyUid;
+    FirebaseUser user;
     final static String companyInformation = "companyInformation";
 
     @Override
@@ -30,6 +33,7 @@ public class AcceptActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_acceptactivity);
 
+        TextView watchLocation = findViewById(R.id.watchLocation);
         Button acceptButton = findViewById(R.id.accept_button);
         Button rejectButton = findViewById(R.id.reject_button);
         aCompany = findViewById(R.id.aCompanyName);
@@ -74,6 +78,15 @@ public class AcceptActivity extends AppCompatActivity {
                 intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TASK);
                 intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
                 startActivity(intent2);
+            }
+        });
+
+        watchLocation.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(AcceptActivity.this, MapActivity.class);
+                intent.putExtra("company_location", aCompany.getText().toString().trim());
+                startActivity(intent);
             }
         });
 

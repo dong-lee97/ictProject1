@@ -57,7 +57,6 @@ public class Resume_register extends AppCompatActivity {
     private StorageReference mStorageRef;
     private DatabaseReference mDatabaseRef;
     private StorageTask mUploadTask;
-    private FirebaseUser user;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -284,7 +283,7 @@ public class Resume_register extends AppCompatActivity {
     }
 
     private void uploadFile(final ArrayList<String> experienceList) {
-        user = FirebaseAuth.getInstance().getCurrentUser();
+        FirebaseUser user = FirebaseAuth.getInstance().getCurrentUser();
         final String uid = user.getUid();
         if (mImageUri != null) {
             StorageReference fileReference = mStorageRef.child(uid).child(System.currentTimeMillis()
