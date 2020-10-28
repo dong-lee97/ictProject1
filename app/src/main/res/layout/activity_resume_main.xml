@@ -84,10 +84,10 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_above="@id/age"
+                    android:fontFamily="@font/bmjua_ttf"
                     android:layout_marginStart="10dp"
                     android:background="#00ff0000"
-                    android:padding="8dp"
-                    android:textColor="#000000" />
+                    android:padding="8dp" />
 
                 <TextView
                     android:id="@+id/age"
@@ -107,8 +107,8 @@
                     android:layout_alignParentBottom="true"
                     android:layout_marginStart="10dp"
                     android:background="#00ff0000"
-                    android:padding="8dp"
-                    android:textColor="#000000" />
+                    android:fontFamily="@font/bmjua_ttf"
+                    android:padding="8dp" />
 
             </RelativeLayout>
 
@@ -154,8 +154,8 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:background="#00ff0000"
+                android:fontFamily="@font/bmjua_ttf"
                 android:padding="4dp"
-                android:textColor="#000000"
                 android:textSize="15sp" />
 
         </LinearLayout>
@@ -191,7 +191,7 @@
                 android:layout_height="wrap_content"
                 android:background="#00ff0000"
                 android:padding="4dp"
-                android:textColor="#000000"
+                android:fontFamily="@font/bmjua_ttf"
                 android:textSize="15sp" />
 
         </LinearLayout>
@@ -228,7 +228,7 @@
                 android:layout_height="wrap_content"
                 android:background="#00ff0000"
                 android:padding="4dp"
-                android:textColor="#000000"
+                android:fontFamily="@font/bmjua_ttf"
                 android:textSize="15sp" />
 
         </LinearLayout>
@@ -265,7 +265,7 @@
                 android:layout_height="wrap_content"
                 android:background="#00ff0000"
                 android:padding="4dp"
-                android:textColor="#000000"
+                android:fontFamily="@font/bmjua_ttf"
                 android:textSize="15sp" />
 
         </LinearLayout>
@@ -337,7 +337,8 @@
                 android:layout_gravity="center"
                 android:layout_marginTop="20dp"
                 android:background="@drawable/round"
-                android:text="연락하기" />
+                android:text="연락하기"
+                android:fontFamily="@font/bmjua_ttf"/>
         </LinearLayout>
 
     </LinearLayout>

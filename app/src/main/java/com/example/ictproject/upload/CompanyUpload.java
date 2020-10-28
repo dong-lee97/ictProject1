@@ -2,6 +2,7 @@ package com.example.ictproject.upload;
 
 public class CompanyUpload {
     private String name;
+    private String myPhoneNum;
     private String companyName;
     private String companyPhone;
     private String uid;
@@ -15,8 +16,9 @@ public class CompanyUpload {
         this.companyPhone = cPhone;
         this.uid = uid;
     }
-    public CompanyUpload(String name, String cName, String cPhone, String uid) {
+    public CompanyUpload(String name, String myPhoneNum ,String cName, String cPhone, String uid) {
         this.name = name;
+        this.myPhoneNum = myPhoneNum;
         this.companyName = cName;
         this.companyPhone = cPhone;
         this.uid = uid;
@@ -38,5 +40,6 @@ public class CompanyUpload {
     }
     public String getUid() {return uid; }
     public void setUid(String uid) { this.uid = uid; }
-
+    public String getMyPhoneNum() { return myPhoneNum; }
+    public void setMyPhoneNum(String myPhoneNum) { this.myPhoneNum = myPhoneNum; }
 }

@@ -6,9 +6,7 @@ import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 import android.content.Intent;
-import android.content.SharedPreferences;
 import android.os.Bundle;
-import android.provider.ContactsContract;
 import android.telephony.SmsManager;
 import android.view.Gravity;
 import android.view.LayoutInflater;
@@ -44,14 +42,14 @@ import java.util.List;
 public class MessageActivity extends AppCompatActivity {
 
     private DatabaseReference DatabaseRef, fDatabaseRef, chatDatabaseRef;
-    private String destinationUid, chatRoomUid, uid, phoneNum, num;
+    private String destinationUid, chatRoomUid, uid, comPhone, albaPhone;
     private RelativeLayout relativeLayout;
     private Button button, matchButton;
     private EditText editText, feedbackEditText;
     private RecyclerView recyclerView;
     private TextView textView;
     private CompanyUpload cUploads;
-    private SharedPreferences appData;
+    private Upload mUploads;
 
     @Override
     protected void onCreate(final Bundle savedInstanceState) {
@@ -74,9 +72,6 @@ public class MessageActivity extends AppCompatActivity {
         ImageView imageView = findViewById(R.id.backward);
         Button uploadFd = findViewById(R.id.uploadFeedback);
         Button feedback = findViewById(R.id.feedbackButton);
-
-        appData = getSharedPreferences("appData", MODE_PRIVATE);
-        load();
 
         DatabaseRef.addListenerForSingleValueEvent(new ValueEventListener() {
             @Override
@@ -139,28 +134,28 @@ public class MessageActivity extends AppCompatActivity {
         matchButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                if (num == "1") {
-                    matchButton.setEnabled(false);
-                }
-
                 DatabaseRef.addListenerForSingleValueEvent(new ValueEventListener() {
                     @Override
                     public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
                         if (dataSnapshot.child("company").hasChild(uid)) {
-                            matchButton.setEnabled(false);
-                        } else {
-                            if (dataSnapshot.child("company").hasChild(destinationUid)) {
-                                cUploads = dataSnapshot.child("company").child(destinationUid).getValue(CompanyUpload.class);
-                                phoneNum = cUploads.getCompanyPhone().trim();
-                                DatabaseRef.child("match").child(uid).setValue("matching");
-                            }
+                            mUploads = dataSnapshot.child("employee").child(destinationUid).getValue(Upload.class);
+                            cUploads = dataSnapshot.child("company").child(uid).getValue(CompanyUpload.class);
+                            albaPhone = mUploads.getPhoneNum().trim();
+                            sendMessage(albaPhone, "[ShareAbility] |n 안녕하세요" + cUploads.getCompanyName() + "입니다. 아르바이트 매칭 확인 차 연락을 드립니다.");
 
-                            try {
-                                //SmsManager smgr = SmsManager.getDefault();
-                                //smgr.sendTextMessage(phoneNum, null, "안녕하세요, 이번에 쉐어빌리티를 통해 근무하게 되어 연락드립니다", null, null);
-                                Toast.makeText(MessageActivity.this, "메시지를 성공적으로 전송하였습니다.", Toast.LENGTH_SHORT).show();
-                            } catch (Exception e) {
-                                Toast.makeText(MessageActivity.this, "메시지 전송을 실패하였습니다.", Toast.LENGTH_SHORT).show();
+                        } else {
+                            cUploads = dataSnapshot.child("company").child(destinationUid).getValue(CompanyUpload.class);
+                            mUploads = dataSnapshot.child("employee").child(uid).getValue(Upload.class);
+                            if (cUploads.getMyPhoneNum() == null) {
+                                comPhone = cUploads.getCompanyPhone().trim();
+                                sendMessage(comPhone, "[ShareAbility] |n 안녕하세요" + cUploads.getCompanyName() + "에서 아르바이트를 하게 된" + mUploads.getName() + "입니다. 아르바이트 매칭 확인 차 연락을 드립니다.");
+                                DatabaseRef.child("match").child(uid).setValue("matching");
+                            } else {
+                                albaPhone = cUploads.getMyPhoneNum().trim();
+                                comPhone = cUploads.getCompanyPhone().trim();
+                                sendMessage(albaPhone, "[ShareAbility] |n 안녕하세요" + cUploads.getCompanyName() + "에서" +  cUploads.getName() + "님 대신 아르바이트를 하게 된" + mUploads.getName() + "입니다. 아르바이트 매칭 확인 차 연락을 드립니다.");
+                                sendMessage(comPhone, "[ShareAbility] |n 안녕하세요" + cUploads.getCompanyName() + "에서" +  cUploads.getName() + "님 대신 아르바이트를 하게 된" + mUploads.getName() + "입니다. 아르바이트 매칭 확인 차 연락을 드립니다.");
+                                DatabaseRef.child("match").child(uid).setValue("matching");
                             }
                         }
                     }
@@ -170,7 +165,6 @@ public class MessageActivity extends AppCompatActivity {
 
                     }
                 });
-                save();
             }
         });
 
@@ -381,13 +375,14 @@ public class MessageActivity extends AppCompatActivity {
         System.exit(1);
     }
 
-    private void save() {
-        SharedPreferences.Editor editor = appData.edit();
-        editor.putString("matchClick", "1");
-        editor.apply();
+    void sendMessage(String phoneNum, String message) {
+        try {
+            SmsManager smgr = SmsManager.getDefault();
+            Toast.makeText(MessageActivity.this, "매칭이 완료되었습니다. 상대방에게 매칭 확인 문자를 전송합니다.", Toast.LENGTH_SHORT).show();
+            smgr.sendTextMessage(phoneNum, null, message, null, null);
+        } catch (Exception e) {
+            Toast.makeText(MessageActivity.this, "메시지 전송을 실패하였습니다.", Toast.LENGTH_SHORT).show();
+        }
     }
 
-    private void load() {
-        num = appData.getString("matchClick",  "");
-    }
 }

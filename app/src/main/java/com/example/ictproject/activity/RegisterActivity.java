@@ -46,11 +46,12 @@ public class RegisterActivity extends AppCompatActivity {
 
     private void signUp() {
         final String name = ((EditText) findViewById(R.id.nameEditText)).getText().toString().trim();
+        final String phoneNum = ((EditText) findViewById(R.id.phoneEditText)).getText().toString().trim();
         String email = ((EditText) findViewById(R.id.emailEditText)).getText().toString().trim();
         String password = ((EditText) findViewById(R.id.passwordEditText)).getText().toString().trim();
         String passwordCheck = ((EditText) findViewById(R.id.passwordCheck)).getText().toString().trim();
 
-        if(name.length() >1 && email.length()>10 && password.length()>5 && passwordCheck.length()>5){
+        if(name.length() >1 && phoneNum.length()>10 && email.length()>10 && password.length()>5 && passwordCheck.length()>5){
             if (password.equals(passwordCheck)) {
                 mAuth.createUserWithEmailAndPassword(email, password)
                         .addOnCompleteListener(this, new OnCompleteListener<AuthResult>() {
@@ -62,7 +63,7 @@ public class RegisterActivity extends AppCompatActivity {
                                     DatabaseRef.addListenerForSingleValueEvent(new ValueEventListener() {
                                         @Override
                                         public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
-                                            Upload upload = new Upload(name, uid);
+                                            Upload upload = new Upload(name, phoneNum, uid);
                                             DatabaseRef.child("employee").child(uid).setValue(upload);
                                         }
                                         @Override

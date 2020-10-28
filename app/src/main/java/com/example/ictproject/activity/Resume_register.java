@@ -2,7 +2,6 @@ package com.example.ictproject.activity;
 
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
-
 import android.content.ContentResolver;
 import android.content.Intent;
 import android.net.Uri;
@@ -30,8 +29,11 @@ import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.android.gms.tasks.Task;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
+import com.google.firebase.database.DataSnapshot;
+import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
+import com.google.firebase.database.ValueEventListener;
 import com.google.firebase.storage.FirebaseStorage;
 import com.google.firebase.storage.StorageReference;
 import com.google.firebase.storage.StorageTask;
@@ -47,12 +49,10 @@ public class Resume_register extends AppCompatActivity {
 
     private EditText mEditTextFileName, mEditTextAge, mExperienceDetail, mDay;
     private ImageView mImageView;
-    private TextView mRegion;
-    private TextView region;
-    private TextView mExperience;
+    private TextView mRegion, region, mExperience;
     private RelativeLayout relativeLayout1, relativeLayout2, relativeLayout;
     private LinearLayout experience;
-    private String sex;
+    private String sex, phoneNum, name;
     private Uri mImageUri;
     private StorageReference mStorageRef;
     private DatabaseReference mDatabaseRef;
@@ -98,6 +98,21 @@ public class Resume_register extends AppCompatActivity {
 
         mStorageRef = FirebaseStorage.getInstance().getReference("user");
         mDatabaseRef = FirebaseDatabase.getInstance().getReference("user");
+        final FirebaseUser user = FirebaseAuth.getInstance().getCurrentUser();
+
+        mDatabaseRef.addListenerForSingleValueEvent(new ValueEventListener() {
+            @Override
+            public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
+                phoneNum = dataSnapshot.child("employee").child(user.getUid()).getValue(Upload.class).getPhoneNum();
+                name = dataSnapshot.child("employee").child(user.getUid()).getValue(Upload.class).getName();
+                mEditTextFileName.setText(name);
+            }
+
+            @Override
+            public void onCancelled(@NonNull DatabaseError databaseError) {
+
+            }
+        });
 
         final ArrayList<String> experienceList = new ArrayList<>();
 
@@ -215,8 +230,6 @@ public class Resume_register extends AppCompatActivity {
             }
         });
 
-
-
         radioGroup.setOnCheckedChangeListener(new RadioGroup.OnCheckedChangeListener() {
             @Override
             public void onCheckedChanged(RadioGroup group, int checkedId) {
@@ -254,6 +267,30 @@ public class Resume_register extends AppCompatActivity {
         createExperienceView(button9, view9, experienceList);
         createExperienceView(button10, view10, experienceList);
         createExperienceView(button11, view11, experienceList);
+
+        ImageView questionMark = findViewById(R.id.questionMark);
+        final RelativeLayout wishJob = findViewById(R.id.wishJob);
+
+        questionMark.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                relativeLayout.setVisibility(View.GONE);
+                wishJob.setVisibility(View.VISIBLE);
+            }
+        });
+
+        Button wishButton = findViewById(R.id.wishYes);
+        final EditText wish_job = findViewById(R.id.wish_job);
+        wishButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                relativeLayout.setVisibility(View.VISIBLE);
+                wishJob.setVisibility(View.GONE);
+                wish_job.setText("음식점/주점");
+            }
+        });
+
+
 
     }
 
@@ -297,7 +334,7 @@ public class Resume_register extends AppCompatActivity {
                             while (!urlTask.isSuccessful()) ;
                             Uri downloadUrl = urlTask.getResult();
                             Upload upload = new Upload(mEditTextFileName.getText().toString().trim(), downloadUrl.toString(), mEditTextAge.getText().toString().trim(), sex,
-                                    experienceList.toString().replace("[", "").replace("]", "").trim(), mExperienceDetail.getText().toString().trim(), mRegion.getText().toString().trim(), mDay.getText().toString().trim(), uid);
+                                    experienceList.toString().replace("[", "").replace("]", "").trim(), mExperienceDetail.getText().toString().trim(), mRegion.getText().toString().trim(), mDay.getText().toString().trim(), uid, phoneNum);
                             mDatabaseRef.child("employee").child(uid).removeValue();
                             mDatabaseRef.child("employee").child(uid).setValue(upload);
                             finish();

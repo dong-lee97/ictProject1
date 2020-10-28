@@ -25,7 +25,6 @@ public class AcceptActivity extends AppCompatActivity {
     private TextView aCompany, aPhone;
     private CompanyUpload cUpload;
     private String companyUid;
-    FirebaseUser user;
     final static String companyInformation = "companyInformation";
 
     @Override
@@ -85,6 +84,10 @@ public class AcceptActivity extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 Intent intent = new Intent(AcceptActivity.this, MapActivity.class);
+                String company_location = aCompany.getText().toString().trim();
+                if (company_location.contains("대타")) {
+                    company_location.replace("(대타)", "");
+                }
                 intent.putExtra("company_location", aCompany.getText().toString().trim());
                 startActivity(intent);
             }

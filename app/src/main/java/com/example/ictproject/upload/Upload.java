@@ -10,17 +10,19 @@ public class Upload {
     private String region;
     private String day;
     private String uid;
+    private String phoneNum;
 
 
     public Upload() {
         //empty constructor needed
     }
 
-    public Upload(String name, String uid) {
+    public Upload(String name, String phoneNum, String uid) {
         this.name = name;
+        this.phoneNum = phoneNum;
         this.uid = uid;
     }
-    public Upload(String name, String imageUrl, String age, String sex, String experience, String detail, String region, String day, String uid) {
+    public Upload(String name, String imageUrl, String age, String sex, String experience, String detail, String region, String day, String uid, String phoneNum) {
         this.name = name;
         this.imageUrl = imageUrl;
         this.age = age;
@@ -30,6 +32,7 @@ public class Upload {
         this.region = region;
         this.day = day;
         this.uid = uid;
+        this.phoneNum = phoneNum;
     }
 
     public String getName() {
@@ -85,5 +88,13 @@ public class Upload {
     }
     public void setSex(String sex) {
         this.sex = sex;
+    }
+
+    public String getPhoneNum() {
+        return phoneNum;
+    }
+
+    public void setPhoneNum(String phoneNum) {
+        this.phoneNum = phoneNum;
     }
 }

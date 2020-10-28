@@ -78,6 +78,7 @@
                 android:layout_height="wrap_content"
                 android:layout_above="@id/age"
                 android:layout_marginStart="10dp"
+                android:fontFamily="@font/bmjua_ttf"
                 android:padding="8dp" />
 
             <TextView
@@ -97,6 +98,7 @@
                 android:layout_height="wrap_content"
                 android:layout_alignParentBottom="true"
                 android:layout_marginStart="10dp"
+                android:fontFamily="@font/bmjua_ttf"
                 android:padding="8dp" />
 
         </RelativeLayout>
@@ -148,7 +150,8 @@
             <EditText
                 android:id="@+id/experience1"
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content" />
+                android:layout_height="wrap_content"
+                android:fontFamily="@font/bmjua_ttf"/>
 
         </LinearLayout>
 
@@ -181,7 +184,8 @@
                 android:id="@+id/detail1"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:hint="ex) 세븐일레븐 6개월" />
+                android:hint="ex) 세븐일레븐 6개월"
+                android:fontFamily="@font/bmjua_ttf"/>
 
         </LinearLayout>
 
@@ -215,7 +219,8 @@
                 android:id="@+id/possible_region1"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:hint="ex) 서울시 마포구, 전체" />
+                android:hint="ex) 서울시 마포구, 전체"
+                android:fontFamily="@font/bmjua_ttf"/>
 
         </LinearLayout>
 
@@ -249,7 +254,8 @@
                 android:id="@+id/possible_day1"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:hint="ex) 2020년 5월 1일 ~ 12월 31일" />
+                android:hint="ex) 2020년 5월 1일 ~ 12월 31일"
+                android:fontFamily="@font/bmjua_ttf"/>
 
         </LinearLayout>
 
@@ -260,6 +266,7 @@
             android:layout_gravity="center"
             android:layout_marginTop="20dp"
             android:background="@color/mainColor"
+            android:fontFamily="@font/bmjua_ttf"
             android:text="수정" />
 
     </LinearLayout>

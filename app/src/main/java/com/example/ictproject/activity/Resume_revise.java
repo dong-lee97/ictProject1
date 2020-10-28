@@ -38,7 +38,7 @@ public class Resume_revise extends AppCompatActivity {
     private EditText mEditTextFileName, mEditTextAge, mExperience, mRegion, mDay, mDetail;
     private ImageView mImageView;
     private Uri mImageUri;
-    private String uid, sex;
+    private String uid, sex, phoneNum;
     private FirebaseUser user;
     private StorageReference mStorageRef;
     private DatabaseReference mDatabaseRef;
@@ -73,6 +73,7 @@ public class Resume_revise extends AppCompatActivity {
                 mDetail.setText(upload.getDetail());
                 mRegion.setText(upload.getRegion());
                 mDay.setText(upload.getDay());
+                phoneNum = upload.getPhoneNum();
 
                 Glide.with(getApplicationContext())
                         .load(upload.getImageUrl())
@@ -144,7 +145,7 @@ public class Resume_revise extends AppCompatActivity {
                             while (!urlTask.isSuccessful()) ;
                             Uri downloadUrl = urlTask.getResult();
                             Upload upload = new Upload(mEditTextFileName.getText().toString().trim(), downloadUrl.toString(), mEditTextAge.getText().toString().trim(), sex,
-                                    mExperience.getText().toString().trim(), mDetail.getText().toString().trim(), mRegion.getText().toString().trim(), mDay.getText().toString().trim(), uid);
+                                    mExperience.getText().toString().trim(), mDetail.getText().toString().trim(), mRegion.getText().toString().trim(), mDay.getText().toString().trim(), uid, phoneNum);
                             mDatabaseRef.child("employee").child(uid).setValue(upload);
                             finish();
                         }

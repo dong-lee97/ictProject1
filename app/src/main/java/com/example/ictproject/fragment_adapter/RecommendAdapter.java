@@ -8,14 +8,17 @@ import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.TextView;
-
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
-
 import com.bumptech.glide.Glide;
 import com.example.ictproject.R;
 import com.example.ictproject.activity.ConnectActivity;
 import com.example.ictproject.upload.Upload;
+import com.google.firebase.database.DataSnapshot;
+import com.google.firebase.database.DatabaseError;
+import com.google.firebase.database.DatabaseReference;
+import com.google.firebase.database.FirebaseDatabase;
+import com.google.firebase.database.ValueEventListener;
 import java.util.ArrayList;
 
 public class RecommendAdapter extends RecyclerView.Adapter<RecommendAdapter.RecommendViewHolder> {
@@ -37,7 +40,7 @@ public class RecommendAdapter extends RecyclerView.Adapter<RecommendAdapter.Reco
     }
 
     @Override
-    public void onBindViewHolder(RecommendViewHolder holder, int position) {
+    public void onBindViewHolder(final RecommendViewHolder holder, int position) {
         final Upload uploadCurrent = recommendUploads.get(position);
         holder.textViewName.setText(uploadCurrent.getName());
         holder.textViewExperience.setText(uploadCurrent.getExperience());
@@ -49,6 +52,23 @@ public class RecommendAdapter extends RecyclerView.Adapter<RecommendAdapter.Reco
                 .override(110, 110)
                 .centerCrop()
                 .into(holder.imageView);
+        DatabaseReference databaseReference = FirebaseDatabase.getInstance().getReference("user");
+        databaseReference.addListenerForSingleValueEvent(new ValueEventListener() {
+            @Override
+            public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
+                if (dataSnapshot.child("match").hasChild(uploadCurrent.getUid())){
+                    holder.badge.setVisibility(View.VISIBLE);
+                } else {
+                    holder.badge.setVisibility(View.GONE);
+                }
+            }
+
+            @Override
+            public void onCancelled(@NonNull DatabaseError databaseError) {
+
+            }
+        });
+
         holder.button.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -67,13 +87,14 @@ public class RecommendAdapter extends RecyclerView.Adapter<RecommendAdapter.Reco
 
     static class RecommendViewHolder extends RecyclerView.ViewHolder {
         TextView textViewName, textViewExperience, textViewDetail, textViewRegion, textViewDay;
-        ImageView imageView;
+        ImageView imageView, badge;
         Button button;
 
 
         RecommendViewHolder(View itemView) {
             super(itemView);
             imageView = itemView.findViewById(R.id.recommend_image);
+            badge = itemView.findViewById(R.id.recommend_badge);
             textViewName = itemView.findViewById(R.id.recommend_name);
             textViewExperience = itemView.findViewById(R.id.recommend_experience);
             textViewDetail = itemView.findViewById(R.id.recommend_detail);

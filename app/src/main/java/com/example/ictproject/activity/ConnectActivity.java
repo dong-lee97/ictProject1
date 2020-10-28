@@ -5,6 +5,7 @@ import androidx.appcompat.app.AppCompatActivity;
 
 import android.content.Intent;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
@@ -70,6 +71,7 @@ public class ConnectActivity extends AppCompatActivity {
                                 public void onSuccess(DocumentSnapshot documentSnapshot) {
                                     mPushToken = documentSnapshot.getString("pushToken");
                                     SendNotification.sendNotification(mPushToken, "shareAbility", cUpload.getCompanyName() + "에서 연락이 왔습니다!" , cUpload);
+                                    Log.e("mPushToken", mPushToken);
                                     finish();
                                 }
                             });
@@ -82,7 +84,8 @@ public class ConnectActivity extends AppCompatActivity {
                             mUpload = dataSnapshot.child("employee").child(uid).getValue(Upload.class);
                             String companyName = company.getText().toString().trim()+"(대타)";
                             String phoneNumber = phone.getText().toString().trim();
-                            cUpload = new CompanyUpload(mUpload.getName(), companyName, phoneNumber, uid);
+                            String myPhone = mUpload.getPhoneNum();
+                            cUpload = new CompanyUpload(mUpload.getName(), myPhone, companyName, phoneNumber, uid);
                             cDatabaseRef.child("company").child(uid).setValue(cUpload);
                             cDatabaseRef.child("employee").child(uid).removeValue();
 

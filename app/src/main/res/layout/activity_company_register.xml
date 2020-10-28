@@ -51,6 +51,7 @@
         <EditText
             android:id="@+id/cEmailEditText"
             android:layout_width="match_parent"
+            android:fontFamily="@font/bmjua_ttf"
             android:layout_height="wrap_content"
             android:hint="영문, 숫자 8글자 이상"
             android:padding="12dp"
@@ -86,6 +87,7 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:hint="영문, 숫자 6자리 이상"
+            android:inputType="textPassword"
             android:padding="12dp"
             android:textSize="13sp" />
 
@@ -98,6 +100,7 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:hint="비밀번호 확인"
+            android:inputType="textPassword"
             android:padding="12dp"
             android:textSize="13sp" />
 
