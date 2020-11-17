@@ -867,7 +867,15 @@
                             android:layout_height="wrap_content"
                             android:layout_marginStart="5dp"
                             android:fontFamily="@font/bmjua_ttf"
-                            android:text="성별 : 남성"
+                            android:text="성별 : "
+                            android:textColor="#000000" />
+
+                        <TextView
+                            android:id="@+id/sexForWish"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_marginStart="5dp"
+                            android:fontFamily="@font/bmjua_ttf"
                             android:textColor="#000000" />
 
                     </LinearLayout>
@@ -891,7 +899,15 @@
                             android:layout_height="wrap_content"
                             android:layout_marginStart="5dp"
                             android:fontFamily="@font/bmjua_ttf"
-                            android:text="나이 : 20대 초반"
+                            android:text="나이 : "
+                            android:textColor="#000000" />
+
+                        <TextView
+                            android:id="@+id/ageForWish"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_marginStart="5dp"
+                            android:fontFamily="@font/bmjua_ttf"
                             android:textColor="#000000" />
 
                     </LinearLayout>
@@ -909,11 +925,11 @@
                             android:src="@drawable/ic_right_arrow"/>
 
                         <TextView
+                            android:id="@+id/resultOfWish"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:layout_marginStart="5dp"
                             android:fontFamily="@font/bmjua_ttf"
-                            android:text="20대 초반 남성에게 음식점/주점이 적합합니다."
                             android:textColor="#000000" />
 
                     </LinearLayout>

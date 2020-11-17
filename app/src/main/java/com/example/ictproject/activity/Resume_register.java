@@ -24,6 +24,7 @@ import com.example.ictproject.R;
 import com.example.ictproject.RegionData;
 import com.example.ictproject.fragment_adapter.RegionAdapter;
 import com.example.ictproject.upload.Upload;
+import com.example.ictproject.wishData;
 import com.google.android.gms.tasks.OnFailureListener;
 import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.android.gms.tasks.Task;
@@ -49,10 +50,10 @@ public class Resume_register extends AppCompatActivity {
 
     private EditText mEditTextFileName, mEditTextAge, mExperienceDetail, mDay;
     private ImageView mImageView;
-    private TextView mRegion, region, mExperience;
+    private TextView mRegion, region, mExperience, sexForWish, ageForWish, resultForWish;
     private RelativeLayout relativeLayout1, relativeLayout2, relativeLayout;
     private LinearLayout experience;
-    private String sex, phoneNum, name;
+    private String sex, phoneNum, name, wish, wish1;
     private Uri mImageUri;
     private StorageReference mStorageRef;
     private DatabaseReference mDatabaseRef;
@@ -270,14 +271,80 @@ public class Resume_register extends AppCompatActivity {
 
         ImageView questionMark = findViewById(R.id.questionMark);
         final RelativeLayout wishJob = findViewById(R.id.wishJob);
+        final wishData data1 = new wishData("20대 초반", "남성", "편의점");
+        final wishData data2 = new wishData("20대 중반", "남성", "음식점/주점");
+        final wishData data3 = new wishData("20대 후반", "남성", "헬스장");
+        final wishData data4 = new wishData("30대 초반", "남성", "PC방");
+        final wishData data5 = new wishData("30대 중반 이상", "남성", "청소/용역");
+        final wishData data6 = new wishData("20대 초반", "여성", "카페");
+        final wishData data7 = new wishData("20대 중반", "여성", "학원");
+        final wishData data8 = new wishData("20대 후반", "여성", "의류");
+        final wishData data9 = new wishData("30대 초반", "여성", "뷰티");
+        final wishData data10 = new wishData("30대 중반 이상", "여성", "마트");
 
-        questionMark.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                relativeLayout.setVisibility(View.GONE);
-                wishJob.setVisibility(View.VISIBLE);
-            }
-        });
+        final ArrayList<wishData> wishList = new ArrayList<>();
+        wishList.add(data1); wishList.add(data2); wishList.add(data3); wishList.add(data4);
+        wishList.add(data5); wishList.add(data6); wishList.add(data7); wishList.add(data8);
+        wishList.add(data9); wishList.add(data10);
+
+        final ArrayList<String> ageList1 = new ArrayList<>();
+        ageList1.add("20"); ageList1.add("21"); ageList1.add("22");
+        final ArrayList<String> ageList2 = new ArrayList<>();
+        ageList2.add("23"); ageList2.add("24"); ageList2.add("25"); ageList2.add("26");
+        final ArrayList<String> ageList3 = new ArrayList<>();
+        ageList3.add("27"); ageList3.add("28"); ageList3.add("29");
+        final ArrayList<String> ageList4 = new ArrayList<>();
+        ageList4.add("30"); ageList4.add("31"); ageList4.add("32");
+
+        sexForWish = findViewById(R.id.sexForWish);
+        ageForWish = findViewById(R.id.ageForWish);
+        resultForWish = findViewById(R.id.resultOfWish);
+
+        if (mEditTextAge == null) {
+            questionMark.setEnabled(true);
+        } else {
+            questionMark.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    relativeLayout.setVisibility(View.GONE);
+                    wishJob.setVisibility(View.VISIBLE);
+                    String sex1 = sex+"성";
+                    String realAge = mEditTextAge.getText().toString().trim();
+                    String age1 = "";
+                    if (ageList1.contains(realAge)) {
+                        age1 = "20대 초반";
+                    } else if (ageList2.contains(realAge)) {
+                        age1 = "20대 중반";
+                    } else if (ageList3.contains(realAge)) {
+                        age1 = "20대 후반";
+                    } else if (ageList4.contains(realAge)) {
+                        age1 = "30대 초반";
+                    } else {
+                        age1 = "30대 중반 이상";
+                    }
+                    sexForWish.setText(sex1);
+                    ageForWish.setText(age1);
+
+                    for (wishData wishData : wishList) {
+                        if (wishData.getSex().trim().contains(sex1) && wishData.getAge().trim().contains(age1)) {
+                            ArrayList<wishData> newList = new ArrayList<>();
+                            newList.add(wishData);
+
+                            for (wishData wishData1 : newList) {
+                                wish = wishData1.getExperience().trim();
+                            }
+                        }
+                    }
+                    if (wish.equals("카페") || wish.equals("의류") || wish.equals("마트") || wish.equals("뷰티")) {
+                        wish1 = wish+"가";
+                    } else {
+                        wish1 = wish+"이";
+                    }
+                    resultForWish.setText(age1+" "+sex1+"에게 "+wish1+" 적합합니다.");
+                }
+            });
+        }
+
 
         Button wishButton = findViewById(R.id.wishYes);
         final EditText wish_job = findViewById(R.id.wish_job);
@@ -286,7 +353,7 @@ public class Resume_register extends AppCompatActivity {
             public void onClick(View v) {
                 relativeLayout.setVisibility(View.VISIBLE);
                 wishJob.setVisibility(View.GONE);
-                wish_job.setText("음식점/주점");
+                wish_job.setText(wish);
             }
         });
 
@@ -381,6 +448,7 @@ public class Resume_register extends AppCompatActivity {
         });
 
     }
+
     private void createRegionView(final TextView region, final TextView mRegion, final TextView name, final ListView listView, final ArrayList<String> regionList, final ArrayList<String> detailList,
                                   final ArrayList<Boolean> bList, final ArrayList<RegionData> regionDataList, final ArrayList<RegionData> dataList) {
         final Boolean[] Bg_change = {true};
